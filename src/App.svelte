@@ -1,4 +1,5 @@
 <script>
+  import Tailwindcss from "./Tailwindcss.svelte";
   import FusionCharts from "fusioncharts";
   import Charts from "fusioncharts/fusioncharts.charts";
   import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
@@ -37,4 +38,5 @@
   };
 </script>
 
+<Tailwindcss />
 <SvelteFC {...chartConfigs} />
