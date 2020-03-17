@@ -1,40 +1,38 @@
 <script>
   import { onMount } from 'svelte'
   import Chart from 'chart.js'
-  import confirmed from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv';
-  
-  console.log(confirmed)
+  import confirmed from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
+  import deaths from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv'
+  import recovered from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv'
 
-  const apiURL = 'https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats'
-  let chartData = { labels: [], data: [] }
+  console.log(confirmed, recovered, deaths)
+  const confirmedItaly = confirmed[16]
+  const confirmedKorea = confirmed[156]
+  let chartData = {}
 
   onMount(async () => {
-    await getData()
+    const italyData = await processData(confirmedItaly)
+    const koreaData = await processData(confirmedKorea)
+    chartData.labels = await italyData.dateArray
+    chartData.italy = await italyData.country
+    chartData.italyData = await italyData.valueArray
+    chartData.korea = await koreaData.country
+    chartData.koreaData = await koreaData.valueArray
     await renderChart()
   })
 
-  const getData = async () => {
-    const response = await fetch(apiURL, {
-      headers: {
-        'x-rapidapi-host': 'covid-19-coronavirus-statistics.p.rapidapi.com',
-        'x-rapidapi-key': '5678e57a0dmsh83ea7d4f23d48e6p1152d7jsn678f6668471c'
-      }
-    })
+  const processData = o => {
+    let dataObj = { country: o['Country/Region'], dateArray: [], valueArray: [] }
 
-    let data = []
-    let dataObj = {}
-    data = await response.json()
-    data.data.covid19Stats.forEach(o => {
-      if (dataObj[o.country]) {
-        dataObj[o.country] += o.confirmed
-      } else {
-        dataObj[o.country] = o.confirmed
+    for (const date in o) {
+      if (/^\d{1,2}\/\d{1,2}\/\d{2}$/i.test(date)) {
+        dataObj.dateArray.push(date)
+        dataObj.valueArray.push(o[date])
       }
-    })
-    for (const country in dataObj) {
-      chartData.labels.push(country)
-      chartData.data.push(dataObj[country])
     }
+    console.log(dataObj)
+
+    return dataObj
   }
 
   const renderChart = () => {
@@ -45,14 +43,39 @@
         labels: chartData.labels,
         datasets: [
           {
-            label: 'My First dataset',
+            label: chartData.italy,
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: chartData.data
+            data: chartData.italyData
+          },
+          {
+            label: chartData.korea,
+            backgroundColor: 'rgb(25, 199, 132)',
+            borderColor: 'rgb(25, 199, 132)',
+            data: chartData.koreaData
           }
         ]
       },
-      options: {}
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: 'Grid Line Settings'
+        },
+        scales: {
+          y: {
+            gridLines: {
+              drawBorder: false,
+              color: ['pink', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'purple']
+            },
+            min: 0,
+            max: 100,
+            ticks: {
+              stepSize: 10
+            }
+          }
+        }
+      }
     })
   }
 </script>
