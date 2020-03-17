@@ -4,6 +4,22 @@
   import Charts from 'fusioncharts/fusioncharts.charts'
   import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion'
   import SvelteFC, { fcRoot } from 'svelte-fusioncharts'
+  import { onMount } from 'svelte'
+
+  const apiURL = 'https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats'
+  let data = []
+
+  onMount(async function() {
+    const response = await fetch(apiURL, {
+      headers: {
+        'x-rapidapi-host': 'covid-19-coronavirus-statistics.p.rapidapi.com',
+        'x-rapidapi-key': '5678e57a0dmsh83ea7d4f23d48e6p1152d7jsn678f6668471c'
+      }
+    })
+    data = await response.json()
+    console.log(data)
+  })
+
   // Always set FusionCharts as the first parameter
   fcRoot(FusionCharts, Charts, FusionTheme)
   const dataSource = {
