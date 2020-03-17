@@ -1,4 +1,5 @@
 import commonjs from '@rollup/plugin-commonjs'
+import dsv from '@rollup/plugin-dsv'
 import json from '@rollup/plugin-json'
 import resolve from '@rollup/plugin-node-resolve'
 import livereload from 'rollup-plugin-livereload'
@@ -17,6 +18,7 @@ export default {
     file: 'public/build/bundle.js'
   },
   plugins: [
+    dsv(),
     json(),
     svelte({
       preprocess: sveltePreprocess({ postcss: true }),
