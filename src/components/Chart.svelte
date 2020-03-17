@@ -4,8 +4,9 @@
   import confirmed from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
   import deaths from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv'
   import recovered from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv'
+  import population from '../data/Population_by_Country_2018.csv'
 
-  console.log(confirmed, recovered, deaths)
+  console.log(population)
   const confirmedItaly = confirmed[16]
   const confirmedKorea = confirmed[156]
   let chartData = {}
@@ -46,13 +47,15 @@
             label: chartData.italy,
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: chartData.italyData
+            data: chartData.italyData,
+            fill: false
           },
           {
             label: chartData.korea,
             backgroundColor: 'rgb(25, 199, 132)',
             borderColor: 'rgb(25, 199, 132)',
-            data: chartData.koreaData
+            data: chartData.koreaData,
+            fill: false
           }
         ]
       },
@@ -63,17 +66,22 @@
           text: 'Grid Line Settings'
         },
         scales: {
-          y: {
-            gridLines: {
-              drawBorder: false,
-              color: ['pink', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'purple']
-            },
-            min: 0,
-            max: 100,
-            ticks: {
-              stepSize: 10
+          xAxes: [
+            {
+              gridLines: {
+                drawBorder: false,
+                color: '#5f616366'
+              }
             }
-          }
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                drawBorder: false,
+                color: '#5f616366'
+              }
+            }
+          ]
         }
       }
     })
