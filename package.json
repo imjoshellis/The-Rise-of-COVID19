@@ -9,6 +9,7 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "@rollup/plugin-commonjs": "^11.0.0",
+    "@rollup/plugin-json": "^4.0.2",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
@@ -19,15 +20,15 @@
     "eslint-plugin-svelte3": "^2.7.3",
     "postcss": "^7.0.27",
     "postcss-load-config": "^2.1.0",
+    "prettier": "^1.19.1",
+    "prettier-plugin-svelte": "^0.7.0",
     "rollup": "^1.20.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
     "svelte": "^3.0.0",
     "svelte-preprocess": "^3.5.0",
-    "tailwindcss": "^1.2.0",
-    "prettier": "^1.19.1",
-    "prettier-plugin-svelte": "^0.7.0"
+    "tailwindcss": "^1.2.0"
   },
   "dependencies": {
     "chart.js": "^2.9.3",
