@@ -3,8 +3,13 @@ module.exports = {
     browser: true,
     es6: true
   },
-  extends: [
-    'standard'
+  extends: ['standard'],
+  plugins: ['svelte3'],
+  overrides: [
+    {
+      files: ['**/*.svelte'],
+      processor: 'svelte3/svelte3'
+    }
   ],
   globals: {
     Atomics: 'readonly',
@@ -14,6 +19,5 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  rules: {
-  }
+  rules: {}
 }
