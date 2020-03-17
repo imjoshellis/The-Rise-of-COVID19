@@ -1,6 +1,9 @@
 <script>
   import { onMount } from 'svelte'
   import Chart from 'chart.js'
+  import confirmed from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv';
+  
+  console.log(confirmed)
 
   const apiURL = 'https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats'
   let chartData = { labels: [], data: [] }
