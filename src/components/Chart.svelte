@@ -1,15 +1,13 @@
 <script>
   import { onMount } from 'svelte'
   import Chart from 'chart.js'
-  import confirmed from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
-  import deaths from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv'
-  import recovered from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv'
-  import population from '../data/Population_by_Country_2018.csv'
+  import data from '../data/data.js'
+
+  console.log(data)
 
   // console.log(population)
   const confirmedItaly = deaths[16]
   const deathsItaly = deaths[16]
-  console.log(deathsItaly)
   let chartData = {}
 
   onMount(async () => {
