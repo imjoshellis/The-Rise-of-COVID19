@@ -6,21 +6,32 @@
   import recovered from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv'
   import population from '../data/Population_by_Country_2018.csv'
 
-  console.log(population)
-  const confirmedItaly = confirmed[16]
-  const confirmedKorea = confirmed[156]
+  // console.log(population)
+  const confirmedItaly = deaths[16]
+  const deathsItaly = deaths[16]
+  console.log(deathsItaly)
   let chartData = {}
 
   onMount(async () => {
     const italyData = await processData(confirmedItaly)
-    const koreaData = await processData(confirmedKorea)
+    const italyDeaths = await processData(deathsItaly)
     chartData.labels = await italyData.dateArray
     chartData.italy = await italyData.country
     chartData.italyData = await italyData.valueArray
-    chartData.korea = await koreaData.country
-    chartData.koreaData = await koreaData.valueArray
+    chartData.italyDeathsLabel = 'true cases based on deaths'
+    chartData.italyDeathsValues = await italyDeaths.valueArray.map(x => mapDeaths(x))
     await renderChart()
   })
+
+  const mapDeaths = death => {
+    const fatalityRate = 0.0087
+    const numCasesCausedDeaths = death / fatalityRate
+    const daysFromInfectionToDeath = 17.3
+    const doublingTime = 6.18
+    const numTimesDoubled = daysFromInfectionToDeath / doublingTime
+    const trueCases = numCasesCausedDeaths * Math.pow(2, numTimesDoubled)
+    return trueCases
+  }
 
   const processData = o => {
     let dataObj = { country: o['Country/Region'], dateArray: [], valueArray: [] }
@@ -31,7 +42,6 @@
         dataObj.valueArray.push(o[date])
       }
     }
-    console.log(dataObj)
 
     return dataObj
   }
@@ -51,10 +61,10 @@
             fill: false
           },
           {
-            label: chartData.korea,
+            label: chartData.italyDeathsLabel,
             backgroundColor: 'rgb(25, 199, 132)',
             borderColor: 'rgb(25, 199, 132)',
-            data: chartData.koreaData,
+            data: chartData.italyDeathsValues,
             fill: false
           }
         ]
