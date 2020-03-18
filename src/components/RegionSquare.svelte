@@ -20,7 +20,7 @@
   .region-square {
     width: 0.75rem;
     height: 0.75rem;
-    @apply mr-1 mb-1;
+    @apply mr-1 mb-1 rounded-sm;
   }
 </style>
 

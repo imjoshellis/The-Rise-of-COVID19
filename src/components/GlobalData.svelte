@@ -103,8 +103,8 @@
         </div>
         <div class="data-div">
           <h4>Future Based on Today's Rate</h4>
+          <div class="data-text">Total cases in 7d: {rnd0(week)}</div>
           <div class="data-subtext">New cases in 7d: {rnd0(week) - today}</div>
-          <div class="data-subtext">Total cases in 7d: {rnd0(week)}</div>
         </div>
       </div>
     </div>
