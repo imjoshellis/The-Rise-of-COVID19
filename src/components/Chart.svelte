@@ -5,64 +5,29 @@
 
   console.log(data)
 
-  // console.log(population)
-  const confirmedItaly = deaths[16]
-  const deathsItaly = deaths[16]
-  let chartData = {}
-
   onMount(async () => {
-    const italyData = await processData(confirmedItaly)
-    const italyDeaths = await processData(deathsItaly)
-    chartData.labels = await italyData.dateArray
-    chartData.italy = await italyData.country
-    chartData.italyData = await italyData.valueArray
-    chartData.italyDeathsLabel = 'true cases based on deaths'
-    chartData.italyDeathsValues = await italyDeaths.valueArray.map(x => mapDeaths(x))
     await renderChart()
   })
-
-  const mapDeaths = death => {
-    const fatalityRate = 0.0087
-    const numCasesCausedDeaths = death / fatalityRate
-    const daysFromInfectionToDeath = 17.3
-    const doublingTime = 6.18
-    const numTimesDoubled = daysFromInfectionToDeath / doublingTime
-    const trueCases = numCasesCausedDeaths * Math.pow(2, numTimesDoubled)
-    return trueCases
-  }
-
-  const processData = o => {
-    let dataObj = { country: o['Country/Region'], dateArray: [], valueArray: [] }
-
-    for (const date in o) {
-      if (/^\d{1,2}\/\d{1,2}\/\d{2}$/i.test(date)) {
-        dataObj.dateArray.push(date)
-        dataObj.valueArray.push(o[date])
-      }
-    }
-
-    return dataObj
-  }
 
   const renderChart = () => {
     var ctx = document.getElementById('myChart').getContext('2d')
     var chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: chartData.labels,
+        labels: data.dates,
         datasets: [
           {
-            label: chartData.italy,
+            label: 'Japan',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: chartData.italyData,
+            data: data.regions['Japan'].total.confirmed,
             fill: false
           },
           {
-            label: chartData.italyDeathsLabel,
+            label: 'US',
             backgroundColor: 'rgb(25, 199, 132)',
             borderColor: 'rgb(25, 199, 132)',
-            data: chartData.italyDeathsValues,
+            data: data.regions['US'].total.confirmed,
             fill: false
           }
         ]

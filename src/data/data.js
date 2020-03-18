@@ -27,37 +27,81 @@ const parseData = () => {
   }
   // Seed the regions and subareas
   confirmedData.forEach(e => {
-    if (data.regions[e['Country/Region']] === undefined) {
-      data.regions[e['Country/Region']] = {
-        total: { deaths: [], confirmed: [], estimated: [] }
+    // shorthand
+    const cr = 'Country/Region'
+    const ps = 'Province/State'
+
+    // new region if it doesn't exist yet
+    if (data.regions[e[cr]] === undefined) {
+      data.regions[e[cr]] = {
+        total: { confirmed: [], confirmedDelta: [] }
       }
-    }
-    if (e['Province/State'].length > 0) {
-      data.regions[e['Country/Region']][e['Province/State']] = {}
     }
 
-    if (data.regions[e['Country/Region']].total.confirmed.length < 1) {
-      for (const date in e) {
-        if (/^\d{1,2}\/\d{1,2}\/\d{2}$/i.test(date)) {
-          data.regions[e['Country/Region']].total.confirmed.push(e[date])
+    // new subarea if it exists in the data
+    if (e[ps].length > 0) {
+      data.regions[e[cr]][e[ps]] = {
+        confirmed: [],
+        confirmedDelta: []
+      }
+    }
+
+    for (const date in e) {
+      // if we're on an actual date element
+      if (/^\d{1,2}\/\d{1,2}\/\d{2}$/i.test(date)) {
+        // figure out what index we're at
+        const matchDate = d => d === date
+        const idx = data.dates.findIndex(matchDate)
+
+        if (data.regions[e[cr]].total.confirmed[idx] === undefined) {
+          // if no data exists yet, create it
+          data.regions[e[cr]].total.confirmed[idx] = parseInt(e[date])
+        } else {
+          // otherwise, add to existing data
+          data.regions[e[cr]].total.confirmed[idx] += parseInt(e[date])
+        }
+
+        if (data.regions[e[cr]].total.confirmed.length > 2) {
+          const i = data.regions[e[cr]].total.confirmed.length - 1
+          const today = data.regions[e[cr]].total.confirmed[i] - data.regions[e[cr]].total.confirmed[i - 1]
+          const yesterday = data.regions[e[cr]].total.confirmed[i - 1] - data.regions[e[cr]].total.confirmed[i - 2]
+          const delta = today - yesterday
+
+          data.regions[e[cr]].total.confirmedDelta[idx] = delta
+        } else {
+          data.regions[e[cr]].total.confirmedDelta[idx] = 0
+        }
+
+        // if subarea is valid, create an array of confirmed and confirmed delta
+        if (e[ps].length > 0) {
+          data.regions[e[cr]][e[ps]].confirmed.push(parseInt(e[date]))
+
+          if (data.regions[e[cr]][e[ps]].confirmed.length > 2) {
+            const i = data.regions[e[cr]][e[ps]].confirmed.length - 1
+            const today = data.regions[e[cr]][e[ps]].confirmed[i] - data.regions[e[cr]][e[ps]].confirmed[i - 1]
+            const yesterday = data.regions[e[cr]][e[ps]].confirmed[i - 1] - data.regions[e[cr]][e[ps]].confirmed[i - 2]
+            const delta = today - yesterday
+
+            data.regions[e[cr]][e[ps]].confirmedDelta[idx] = delta
+          } else {
+            data.regions[e[cr]][e[ps]].confirmedDelta[idx] = 0
+          }
         }
       }
-    } else {
-      // map and add arrays together into total
     }
   })
   // Parse Confirmed Case
   // Parse Deaths
   // Helper function for mapping deaths to estimated cases
-  const mapDeaths = death => {
-    const fatalityRate = 0.0087
-    const numCasesCausedDeaths = death / fatalityRate
-    const daysFromInfectionToDeath = 17.3
-    const doublingTime = 6.18
-    const numTimesDoubled = daysFromInfectionToDeath / doublingTime
-    const trueCases = numCasesCausedDeaths * Math.pow(2, numTimesDoubled)
-    return trueCases
-  }
+  // const mapDeaths = death => {
+  //   const fatalityRate = 0.0087
+  //   const numCasesCausedDeaths = death / fatalityRate
+  //   const daysFromInfectionToDeath = 17.3
+  //   const doublingTime = 6.18
+  //   const numTimesDoubled = daysFromInfectionToDeath / doublingTime
+  //   const trueCases = numCasesCausedDeaths * Math.pow(2, numTimesDoubled)
+  //   return trueCases
+  // }
 }
 
 parseData()
