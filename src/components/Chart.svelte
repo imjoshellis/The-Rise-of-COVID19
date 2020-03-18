@@ -7,13 +7,12 @@
     return array.slice(Math.max(array.length - n, 0))
   }
 
-  export let country
+  export let region
 
-  const confirmedDeltaCurrent = data.regions[country].total.confirmedDelta
+  const confirmedDeltaCurrent = data.regions[region].total.confirmedDelta
   const recent = last(confirmedDeltaCurrent, 5)
   const sum = recent.reduce((a, b) => a + b, 0)
   const avg = sum / 5
-  console.log(country, confirmedDeltaCurrent, recent, sum, avg)
 
   let yValue = avg * 50
   let yUp = (0 - 1) * yValue + 50 + ''
@@ -36,5 +35,6 @@
     xmlns="http://www.w3.org/2000/svg">
     <line x1="50" x2="100" y1="50" y2={yUp} stroke-width="1" />
     <line x1="50" x2="0" y1="50" y2={yDown} stroke-width="1" />
+    <text x="4" y="16" class="fill-current text-xs" stroke-width="0">{Math.round(avg * 100) / 100}</text>
   </svg>
 </div>
