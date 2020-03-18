@@ -14,7 +14,8 @@
   const nowRate = today / yesterday
   const prevRate = yesterday / twoAgo
   const deltaRate = nowRate / prevRate
-  const week = today * Math.exp(nowRate, 7)
+  const week = today * Math.pow(nowRate, 7)
+  const thirtyDays = today * Math.pow(nowRate, 30)
 </script>
 
 <style>
@@ -30,24 +31,39 @@
 
   .data-div {
     flex-basis: 70%;
-    @apply text-sm;
+    @apply text-sm flex flex-col;
   }
 </style>
 
 <div class="flex flex-col">
-  <h3>{region}</h3>
   <div class="flex flex-row">
+    <h3>{region}</h3>
     <div class="chart-div">
       <Slope {region} />
     </div>
+  </div>
+  <div class="flex flex-row">
     <div class="data-div">
+      <h4 class="font-bold">Confirmed Cases</h4>
       <div class="data-text">Today: {today}</div>
       <div class="data-text">Yesterday: {yesterday}</div>
       <div class="data-text">Two Days Ago: {twoAgo}</div>
-      <div class="data-text">Today's Rate: {rnd2(nowRate)}</div>
-      <div class="data-text">Yesterday's Rate: {rnd2(prevRate)}</div>
-      <div class="data-text">∆Rate: {rnd2(deltaRate)}</div>
-      <div class="data-text">In 7 days at today's rate: {rnd0(week)}</div>
+    </div>
+    <div class="data-div">
+      <h4 class="font-bold">Rate of Growth</h4>
+      <div class="data-text">Today: {rnd2(nowRate)}</div>
+      <div class="data-text">Yesterday: {rnd2(prevRate)}</div>
+      <div class="data-text">Rate of Rate: {rnd2(deltaRate)}</div>
+    </div>
+  </div>
+  <div class="flex flex-col">
+
+    <div class="data-div">
+      <h4 class="font-bold">Future Based on Today's Rate</h4>
+      <div class="data-text">New cases in 7d: {rnd0(week) - today}</div>
+      <div class="data-text">Total cases in 7d: {rnd0(week)}</div>
+      <div class="data-text">New cases in 30d: {rnd0(thirtyDays) - today}</div>
+      <div class="data-text">Total cases in a 30d: {rnd0(thirtyDays)}</div>
     </div>
   </div>
 </div>
