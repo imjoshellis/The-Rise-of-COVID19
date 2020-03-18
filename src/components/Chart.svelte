@@ -1,9 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import Chart from 'chart.js'
   import data from '../data/data.js'
-
-  console.log(data)
 
   const last = function(array, n) {
     if (array == null) return void 0
@@ -11,65 +8,11 @@
     return array.slice(Math.max(array.length - n, 0))
   }
 
-  onMount(async () => {
-    await renderChart()
-  })
-
   let x = '100'
   let yValue = last(data.regions['US'].total.confirmedDelta) * 50
   let yUp = (0 - 1) * yValue + 50 + ''
   let yDown = yValue + 50 + ''
 
-  const renderChart = () => {
-    var ctx = document.getElementById('myChart').getContext('2d')
-    var chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: data.dates,
-        datasets: [
-          {
-            label: 'Korea, South',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: data.regions['Korea, South'].total.confirmedDelta,
-            fill: false
-          },
-          {
-            label: 'US',
-            backgroundColor: 'rgb(25, 199, 132)',
-            borderColor: 'rgb(25, 199, 132)',
-            data: data.regions['US'].total.confirmedDelta,
-            fill: false
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        title: {
-          display: true,
-          text: 'Grid Line Settings'
-        },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                drawBorder: false,
-                color: '#5f616366'
-              }
-            }
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                drawBorder: false,
-                color: '#5f616366'
-              }
-            }
-          ]
-        }
-      }
-    })
-  }
 </script>
 
 <style>
