@@ -2,6 +2,7 @@
   import data, { last } from '../data/data.js'
 
   export let region
+  export let growing
 
   const confirmedDeltaCurrent = data.regions[region].total.confirmedDelta
   const recent = last(confirmedDeltaCurrent)
@@ -12,7 +13,7 @@
   let yValue = recent * 50
   let yUp = (0 - 1) * yValue + 50 + ''
   let yDown = yValue + 50 + ''
-  let color = recent > 1 ? 'text-red-500' : 'text-green-500'
+  let color = growing ? 'text-red-500' : 'text-green-500'
 </script>
 
 <style>

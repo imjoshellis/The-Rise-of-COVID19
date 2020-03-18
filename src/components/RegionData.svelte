@@ -39,7 +39,7 @@
   <div class="flex flex-row">
     <h3>{region}</h3>
     <div class="chart-div">
-      <Slope {region} />
+      <Slope {region} growing={deltaRate > 1} />
     </div>
   </div>
   <div class="flex flex-row">
