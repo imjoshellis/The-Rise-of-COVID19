@@ -7,7 +7,15 @@
     return array.slice(Math.max(array.length - n, 0))
   }
 
-  let yValue = last(data.regions['US'].total.confirmedDelta) * 50
+  export let country
+
+  const confirmedDeltaCurrent = data.regions[country].total.confirmedDelta
+  const recent = last(confirmedDeltaCurrent, 5)
+  const sum = recent.reduce((a, b) => a + b, 0)
+  const avg = sum / 5
+  console.log(country, confirmedDeltaCurrent, recent, sum, avg)
+
+  let yValue = avg * 50
   let yUp = (0 - 1) * yValue + 50 + ''
   let yDown = yValue + 50 + ''
 </script>
