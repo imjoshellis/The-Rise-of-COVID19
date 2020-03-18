@@ -14,6 +14,7 @@ export const last = function (array, n) {
 
 const data = {
   dates: [],
+  confirmed: [],
   regions: {
     //   country01: {
     //     subareas: {
@@ -69,6 +70,9 @@ const parseData = () => {
           // otherwise, add to existing data
           data.regions[e[cr]].total.confirmed[idx] += parseInt(e[date])
         }
+
+        // add to global total
+        data.confirmed[idx] += parseInt(e[date])
 
         if (idx > 1) {
           const today = data.regions[e[cr]].total.confirmed[idx]

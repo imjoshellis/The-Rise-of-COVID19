@@ -16,7 +16,7 @@
   let color = growing ? 'text-red-500' : 'text-green-500'
 </script>
 
-<style>
+<style type="text/scss">
   svg {
     display: inline-block;
     width: 100%;
