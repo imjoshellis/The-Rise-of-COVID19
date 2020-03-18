@@ -30,6 +30,7 @@
 
   .data-div {
     flex-basis: 70%;
+    @apply text-sm;
   }
 </style>
 
