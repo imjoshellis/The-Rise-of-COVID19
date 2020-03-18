@@ -10,13 +10,15 @@
   export let region
 
   const confirmedDeltaCurrent = data.regions[region].total.confirmedDelta
-  const recent = last(confirmedDeltaCurrent, 5)
-  const sum = recent.reduce((a, b) => a + b, 0)
-  const avg = sum / 5
+  const recent = last(confirmedDeltaCurrent)
+  const recentValue = Math.round(recent * 100) / 100
+  // const sum = recent.reduce((a, b) => a + b, 0)
+  // const avg = sum / 5
 
-  let yValue = avg * 50
+  let yValue = recent * 50
   let yUp = (0 - 1) * yValue + 50 + ''
   let yDown = yValue + 50 + ''
+  let color = recent > 1 ? 'text-red-500' : 'text-green-500'
 </script>
 
 <style>
@@ -26,15 +28,15 @@
   }
 </style>
 
-<div class="bg-gray-800 rounded-md">
+<div class={color}>
   <svg
     class="stroke-current"
     version="1.1"
     viewBox="0 0 100 100"
     preserveAspectRatio="xMidYMid meet"
     xmlns="http://www.w3.org/2000/svg">
-    <line x1="50" x2="100" y1="50" y2={yUp} stroke-width="1" />
-    <line x1="50" x2="0" y1="50" y2={yDown} stroke-width="1" />
-    <text x="4" y="16" class="fill-current text-xs" stroke-width="0">{Math.round(avg * 100) / 100}</text>
+    <line x1="0" x2="100" y1="100" y2="0" stroke-width="1" class="text-gray-500" />
+    <line x1="50" x2="100" y1="50" y2={yUp} stroke-width="5" />
+    <line x1="50" x2="0" y1="50" y2={yDown} stroke-width="5" />
   </svg>
 </div>

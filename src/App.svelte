@@ -9,5 +9,5 @@
 </style>
 
 <Tailwindcss />
-<h1>COVID CURVES</h1>
+<h1>COVID-19 SLOPES</h1>
 <ChartGrid />

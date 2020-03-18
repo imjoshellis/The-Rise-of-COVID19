@@ -65,9 +65,9 @@ const parseData = () => {
         }
 
         if (idx > 1) {
-          const today = data.regions[e[cr]].total.confirmed[idx] - data.regions[e[cr]].total.confirmed[idx - 1]
-          const yesterday = data.regions[e[cr]].total.confirmed[idx - 1] - data.regions[e[cr]].total.confirmed[idx - 2]
-          const delta = today / yesterday
+          const today = data.regions[e[cr]].total.confirmed[idx]
+          const yesterday = data.regions[e[cr]].total.confirmed[idx - 1]
+          const delta = today / yesterday || 1
 
           if (delta.isNaN || delta !== Infinity) {
             data.regions[e[cr]].total.confirmedDelta[idx] = delta
