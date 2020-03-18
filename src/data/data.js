@@ -6,6 +6,12 @@ import deathData from './COVID-19/csse_covid_19_data/csse_covid_19_time_series/t
 export const confirmed = confirmedData
 export const deaths = deathData
 
+export const last = function (array, n) {
+  if (array == null) return void 0
+  if (n == null) return array[array.length - 1]
+  return array.slice(Math.max(array.length - n, 0))
+}
+
 const data = {
   dates: [],
   regions: {
