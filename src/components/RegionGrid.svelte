@@ -6,7 +6,7 @@
   console.log(data, regions)
 </script>
 
-<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="grid lg:grid-cols-3 gap-4">
   {#each regions as region}
     <RegionData {region} />
   {/each}
