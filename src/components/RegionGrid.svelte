@@ -2,7 +2,7 @@
   import data from '../data/data.js'
   import RegionData from './RegionData.svelte'
 
-  let regions = Object.keys(data.regions)
+  let regions = Object.keys(data.regions).sort()
   console.log(data, regions)
 </script>
 
