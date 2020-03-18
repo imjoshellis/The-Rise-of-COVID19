@@ -10,7 +10,10 @@
 
 <Tailwindcss />
 <h1>COVID CURVES</h1>
-<div style="height:128px;width:128px;">
+<div class="text-red-500">
   <Chart />
 </div>
+<Chart />
+<Chart />
+<Chart />
 <Chart />
