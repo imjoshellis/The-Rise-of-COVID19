@@ -34,7 +34,10 @@ const parseData = () => {
     // new region if it doesn't exist yet
     if (data.regions[e[cr]] === undefined) {
       data.regions[e[cr]] = {
-        total: { confirmed: [], confirmedDelta: [] }
+        total: {
+          confirmed: [],
+          confirmedDelta: []
+        }
       }
     }
 
@@ -61,11 +64,10 @@ const parseData = () => {
           data.regions[e[cr]].total.confirmed[idx] += parseInt(e[date])
         }
 
-        if (data.regions[e[cr]].total.confirmed.length > 2) {
-          const i = data.regions[e[cr]].total.confirmed.length - 1
-          const today = data.regions[e[cr]].total.confirmed[i] - data.regions[e[cr]].total.confirmed[i - 1]
-          const yesterday = data.regions[e[cr]].total.confirmed[i - 1] - data.regions[e[cr]].total.confirmed[i - 2]
-          const delta = today - yesterday
+        if (idx > 1) {
+          const today = data.regions[e[cr]].total.confirmed[idx] - data.regions[e[cr]].total.confirmed[idx - 1]
+          const yesterday = data.regions[e[cr]].total.confirmed[idx - 1] - data.regions[e[cr]].total.confirmed[idx - 2]
+          const delta = today / yesterday
 
           data.regions[e[cr]].total.confirmedDelta[idx] = delta
         } else {
@@ -76,10 +78,10 @@ const parseData = () => {
         if (e[ps].length > 0) {
           data.regions[e[cr]][e[ps]].confirmed.push(parseInt(e[date]))
 
-          if (data.regions[e[cr]][e[ps]].confirmed.length > 2) {
-            const i = data.regions[e[cr]][e[ps]].confirmed.length - 1
-            const today = data.regions[e[cr]][e[ps]].confirmed[i] - data.regions[e[cr]][e[ps]].confirmed[i - 1]
-            const yesterday = data.regions[e[cr]][e[ps]].confirmed[i - 1] - data.regions[e[cr]][e[ps]].confirmed[i - 2]
+          if (idx > 1) {
+            const today = data.regions[e[cr]][e[ps]].confirmed[idx] - data.regions[e[cr]][e[ps]].confirmed[idx - 1]
+            const yesterday =
+              data.regions[e[cr]][e[ps]].confirmed[idx - 1] - data.regions[e[cr]][e[ps]].confirmed[idx - 2]
             const delta = today - yesterday
 
             data.regions[e[cr]][e[ps]].confirmedDelta[idx] = delta
