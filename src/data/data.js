@@ -30,6 +30,7 @@ const parseData = () => {
   for (const date in deaths[0]) {
     if (/^\d{1,2}\/\d{1,2}\/\d{2}$/i.test(date)) {
       data.dates.push(date)
+      data.confirmed.push(0)
     }
   }
   // Seed the regions and subareas

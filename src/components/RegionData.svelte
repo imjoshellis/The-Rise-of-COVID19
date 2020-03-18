@@ -56,24 +56,28 @@
 
 <div class="flex flex-col">
   <h3>{region === 'US' ? 'United States (USA)' : region}</h3>
-  <div class="flex flex-row">
-    <div class="chart-wrap">
-      <div class="chart-div">
-        <Slope {region} growing={deltaRate > 1} />
+  {#if nowRate !== Infinity && prevRate !== Infinity}
+    <div class="flex flex-row">
+      <div class="chart-wrap">
+        <div class="chart-div">
+          <Slope {nowRate} {region} growing={deltaRate > 1} />
+        </div>
+      </div>
+      <div class="data-div">
+        <h4>Confirmed Cases</h4>
+        <div class="data-text ">Today: {today}</div>
+        <div class="data-subtext">Yesterday: {yesterday}</div>
+        <div class="data-subtext">Two Days Ago: {twoAgo}</div>
+        <h4>Rate of Growth</h4>
+        <div class="data-text {redGreen(nowRate, prevRate)}">{arrow(nowRate, prevRate)} Today: {rnd2(nowRate)}</div>
+        <div class="data-subtext">{arrow(prevRate, prevprevRate)} Yesterday: {rnd2(prevRate)}</div>
+        <div class="data-subtext">{arrow(deltaRate, prevDeltaRate)} Rate of Rate: {rnd2(deltaRate)}</div>
+        <h4>Future Based on Today's Rate</h4>
+        <div class="data-subtext">New cases in 7d: {rnd0(week) - today}</div>
+        <div class="data-subtext">Total cases in 7d: {rnd0(week)}</div>
       </div>
     </div>
-    <div class="data-div">
-      <h4>Confirmed Cases</h4>
-      <div class="data-text ">Today: {today}</div>
-      <div class="data-subtext">Yesterday: {yesterday}</div>
-      <div class="data-subtext">Two Days Ago: {twoAgo}</div>
-      <h4>Rate of Growth</h4>
-      <div class="data-text {redGreen(nowRate, prevRate)}">{arrow(nowRate, prevRate)} Today: {rnd2(nowRate)}</div>
-      <div class="data-subtext">{arrow(prevRate, prevprevRate)} Yesterday: {rnd2(prevRate)}</div>
-      <div class="data-subtext">{arrow(deltaRate, prevDeltaRate)} Rate of Rate: {rnd2(deltaRate)}</div>
-      <h4>Future Based on Today's Rate</h4>
-      <div class="data-subtext">New cases in 7d: {rnd0(week) - today}</div>
-      <div class="data-subtext">Total cases in 7d: {rnd0(week)}</div>
-    </div>
-  </div>
+  {:else}
+    <div class="data-div">Not enough data available yet</div>
+  {/if}
 </div>

@@ -3,14 +3,9 @@
 
   export let region
   export let growing
+  export let nowRate
 
-  const confirmedDeltaCurrent = data.regions[region].total.confirmedDelta
-  const recent = last(confirmedDeltaCurrent)
-  const recentValue = Math.round(recent * 100) / 100
-  // const sum = recent.reduce((a, b) => a + b, 0)
-  // const avg = sum / 5
-
-  let yValue = recent * 50
+  let yValue = nowRate * 50
   let yUp = (0 - 1) * yValue + 50 + ''
   let yDown = yValue + 50 + ''
   let color = growing ? 'text-red-500' : 'text-green-500'
