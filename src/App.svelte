@@ -1,40 +1,30 @@
 <script>
-  import FusionCharts from "fusioncharts";
-  import Charts from "fusioncharts/fusioncharts.charts";
-  import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
-  import SvelteFC, { fcRoot } from "svelte-fusioncharts";
+  import Tailwindcss from './Tailwindcss.svelte'
+  import RegionGrid from './components/RegionGrid.svelte'
+  import DateController from './components/DateController.svelte'
+  import GlobalData from './components/GlobalData.svelte'
+  import RegionFilter from './components/RegionFilter.svelte'
+  import { onMount } from 'svelte'
+  import data from './data/data.js'
 
-  // Always set FusionCharts as the first parameter
-  fcRoot(FusionCharts, Charts, FusionTheme);
-
-  const dataSource = {
-    chart: {
-      caption: "Countries With Most Oil Reserves [2017-18]",
-      subCaption: "In MMbbl = One Million barrels",
-      xAxisName: "Country",
-      yAxisName: "Reserves (MMbbl)",
-      numberSuffix: "K",
-      theme: "fusion"
-    },
-    data: [
-      { label: "Venezuela", value: "290" },
-      { label: "Saudi", value: "260" },
-      { label: "Canada", value: "180" },
-      { label: "Iran", value: "140" },
-      { label: "Russia", value: "115" },
-      { label: "UAE", value: "100" },
-      { label: "US", value: "30" },
-      { label: "China", value: "30" }
-    ]
-  };
-
-  const chartConfigs = {
-    type: "column2d",
-    width: 600,
-    height: 400,
-    dataFormat: "json",
-    dataSource: dataSource
-  };
+  let regions = Object.keys(data.regions).sort()
 </script>
 
-<SvelteFC {...chartConfigs} />
+<style>
+
+</style>
+
+<Tailwindcss />
+<div class="flex flex-row items-center justify-beween">
+  <div>
+    <RegionFilter />
+  </div>
+  <div class="flex-grow">
+    <DateController />
+  </div>
+</div>
+
+<div class="my-8">
+  <GlobalData />
+</div>
+<RegionGrid {regions} />
