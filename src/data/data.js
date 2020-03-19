@@ -125,5 +125,11 @@ const parseData = () => {
   // }
 }
 
+const renameUS = () => {
+  data.regions['United States (USA)'] = data.regions.US // Assign new key
+  delete data.regions.US // Delete old key
+}
+
 parseData()
+renameUS()
 export default data

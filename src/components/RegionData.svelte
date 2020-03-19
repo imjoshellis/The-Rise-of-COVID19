@@ -55,9 +55,10 @@
   }
 </style>
 
-<div class="flex flex-col">
-  <h3>{region === 'US' ? 'United States (US)' : region}</h3>
-  {#if nowRate > 0 && nowRate !== Infinity && prevRate !== Infinity}
+{#if nowRate > 0 && nowRate !== Infinity && prevRate !== Infinity}
+  <div class="flex flex-col">
+    <h3>{region === 'US' ? 'United States (US)' : region}</h3>
+
     <div class="flex flex-row">
       <div class="chart-wrap">
         <div class="chart-div">
@@ -79,7 +80,6 @@
 
       </div>
     </div>
-  {:else}
-    <div class="data-div">Not enough data available yet</div>
-  {/if}
-</div>
+
+  </div>
+{/if}
