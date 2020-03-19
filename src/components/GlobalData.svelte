@@ -4,6 +4,7 @@
 
   export let regions
 
+  const rnd5 = x => Math.round(x * 10000) / 10000
   const rnd2 = x => Math.round(x * 100) / 100
   const rnd0 = x => Math.round(x)
 
@@ -20,8 +21,8 @@
   const prevRate = yesterday / twoAgo
   const prevprevRate = twoAgo / threeAgo
 
-  const deltaRate = rnd2(nowRate) / rnd2(prevRate)
-  const prevDeltaRate = rnd2(prevRate) / rnd2(prevprevRate)
+  const deltaRate = rnd5(nowRate) / rnd5(prevRate)
+  const prevDeltaRate = rnd5(prevRate) / rnd5(prevprevRate)
   const week = today * Math.pow(nowRate, 7)
   const thirtyDays = today * Math.pow(nowRate, 30)
 
@@ -97,9 +98,9 @@
         </div>
         <div class="data-div">
           <h4>Rate of Growth</h4>
-          <div class="data-text {redGreen(nowRate, prevRate)}">{arrow(nowRate, prevRate)} Today: {rnd2(nowRate)}</div>
-          <div class="data-subtext">{arrow(prevRate, prevprevRate)} Yesterday: {rnd2(prevRate)}</div>
-          <div class="data-subtext">{arrow(deltaRate, prevDeltaRate)} Rate of Rate: {rnd2(deltaRate)}</div>
+          <div class="data-text {redGreen(nowRate, prevRate)}">{arrow(nowRate, prevRate)} Today: {rnd5(nowRate)}</div>
+          <div class="data-subtext">{arrow(prevRate, prevprevRate)} Yesterday: {rnd5(prevRate)}</div>
+          <div class="data-subtext">{arrow(deltaRate, prevDeltaRate)} Rate of Rate: {rnd5(deltaRate)}</div>
         </div>
         <div class="data-div">
           <h4>Future Based on Today's Rate</h4>
