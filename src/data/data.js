@@ -1,10 +1,8 @@
-import confirmedData from './COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
-import deathData from './COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv'
+import confirmedData from './COVID19/time_series_19-covid-Confirmed.csv'
 // import recovered from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv'
 // import population from '../data/Population_by_Country_2018.csv'
 
 export const confirmed = confirmedData
-export const deaths = deathData
 
 export const last = function (array, n) {
   if (array == null) return void 0
@@ -27,7 +25,7 @@ const data = {
 
 const parseData = () => {
   // Seed the dates array
-  for (const date in deaths[0]) {
+  for (const date in confirmed[0]) {
     if (/^\d{1,2}\/\d{1,2}\/\d{2}$/i.test(date)) {
       data.dates.push(date)
       data.confirmed.push(0)
