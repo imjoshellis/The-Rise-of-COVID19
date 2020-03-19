@@ -15,7 +15,6 @@
 </style>
 
 <Tailwindcss />
-<h1>COVID-19 SLOPES</h1>
 <div class="flex flex-row items-center justify-beween">
   <div>
     <RegionFilter />
@@ -25,5 +24,7 @@
   </div>
 </div>
 
-<GlobalData />
+<div class="my-8">
+  <GlobalData />
+</div>
 <RegionGrid {regions} />
