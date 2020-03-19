@@ -1,4 +1,4 @@
-import confirmedData from './COVID-19/time_series_19-covid-Confirmed.csv'
+import confirmedData from './COVID19/time_series_19-covid-Confirmed.csv'
 // import recovered from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv'
 // import population from '../data/Population_by_Country_2018.csv'
 
