@@ -62,7 +62,7 @@
     <div class="flex flex-row">
       <div class="chart-wrap">
         <div class="chart-div">
-          <Slope {nowRate} {region} growing={deltaRate > 1} />
+          <Slope {nowRate} growing={deltaRate > 1} />
         </div>
       </div>
       <div class="data-div">
