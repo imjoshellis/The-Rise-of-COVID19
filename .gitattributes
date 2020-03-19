@@ -7,4 +7,3 @@
 # Un-Ignore .js & .jsx so repo is JS on GitHub
 *.js linguist-vendored=false
 *.jsx linguist-vendored=false
-*.svelte linguist-vendored=false
