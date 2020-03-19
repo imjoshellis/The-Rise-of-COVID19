@@ -6,7 +6,7 @@
 
 - [Covid Curves](#covid-curves)
   - [Table of Contents](#table-of-contents)
-  - [Live Site](#live-site)
+  - [Version](#version)
   - [Summary](#summary)
     - [Why I built this](#why-i-built-this)
     - [Technology](#technology)
@@ -17,9 +17,13 @@
   - [License](#license)
   - [Built with Svelte](#built-with-svelte)
 
-## Live Site
+## Version
 
- The `master` branch is automatically deployed live when updated (via Netlify): [Live Site](https://determined-raman-df6277.netlify.com)
+The `master` branch is automatically deployed live when updated (via Netlify): [Live Site](https://determined-raman-df6277.netlify.com)
+
+Covid Curves is currently extremly early alpha: v0.1.0-alpha
+
+There are a lot of features pending. View issues to see what I'm working on.
 
 ## Summary
 
