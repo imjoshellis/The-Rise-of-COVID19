@@ -2,7 +2,7 @@
   import data from '../data/data.js'
 
   let i = 0
-  let regions = data.regions.keys()
+  export let regions
 </script>
 
 <label>

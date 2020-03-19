@@ -3,8 +3,7 @@
   import RegionData from './RegionData.svelte'
   import GlobalData from './GlobalData.svelte'
 
-  let regions = Object.keys(data.regions).sort()
-  console.log(data, regions)
+  export let regions
 </script>
 
 <GlobalData {regions} />
