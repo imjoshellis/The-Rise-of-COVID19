@@ -1,11 +1,47 @@
 <script>
-  import data from '../data/data.js'
   import { dateValue, dateIdx, dateMax } from '../stores.js'
 
-  export let regions
+  const increaseDate = () => {
+    $dateIdx < $dateMax ? ($dateIdx += 1) : $dateIdx
+  }
+
+  const decreaseDate = () => {
+    $dateIdx > 4 ? ($dateIdx -= 1) : $dateIdx
+  }
 </script>
 
+<style type="text/css">
+  button {
+    @apply rounded px-4 py-2;
+  }
+  input[type='range'] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+
+  input[type='range']:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+  }
+
+  input[type='range']::-ms-track {
+    width: 100%;
+    cursor: pointer;
+
+    /* Hides the slider so custom styles can be added */
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+</style>
+
 <label>
-  <input type="range" bind:value={$dateIdx} max={$dateMax} />
+  <button on:click={decreaseDate}>‹</button>
+  <input type="range" bind:value={$dateIdx} min="4" max={$dateMax} />
+  <button on:click={increaseDate}>›</button>
 </label>
 <div>Day: {$dateIdx}, {$dateValue}</div>
