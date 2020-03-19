@@ -66,9 +66,7 @@ By default, both `npm run dev` and `npm run start` will create a server on `loca
 
 ## Contributing
 
-I'll write up a proper contributions guide if this project gets attention. For now, please feel free to create an issue, and we'll go from there.
-
-- [ ] TODO: Write section
+Want to help? See CONTRIBUTING.md for details.
 
 ## License
 
