@@ -66,7 +66,7 @@ By default, both `npm run dev` and `npm run start` will create a server on `loca
 
 ## Contributing
 
-Want to help? See CONTRIBUTING.md for details.
+Want to help? See [CONTRIBUTING.md](https://github.com/imjoshellis/covid-curves/blob/develop/CONTRIBUTING.md) for details.
 
 ## License
 
