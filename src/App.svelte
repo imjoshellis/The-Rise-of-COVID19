@@ -14,5 +14,5 @@
 
 <Tailwindcss />
 <h1>COVID-19 SLOPES</h1>
-<DateController {regions} />
+<DateController />
 <RegionGrid {regions} />
