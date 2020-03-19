@@ -1,5 +1,6 @@
 <script>
-  import { regionStr } from '../stores.js'
+  import { regions, regionStr } from '../stores.js'
 </script>
 
-<input type="text" name="region" id="region" value={$regionStr} />
+<input type="text" name="region" id="region" bind:value={$regionStr} />
+<div>{$regions}</div>

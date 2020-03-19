@@ -56,7 +56,7 @@
 </style>
 
 <div class="flex flex-col">
-  <h3>{region === 'US' ? 'United States (USA)' : region}</h3>
+  <h3>{region === 'US' ? 'United States (US)' : region}</h3>
   {#if nowRate > 0 && nowRate !== Infinity && prevRate !== Infinity}
     <div class="flex flex-row">
       <div class="chart-wrap">

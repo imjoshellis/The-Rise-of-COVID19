@@ -3,14 +3,13 @@
   import RegionData from './RegionData.svelte'
   import GlobalData from './GlobalData.svelte'
   import RegionFilter from './RegionFilter.svelte'
-
-  export let regions
+  import { regions } from '../stores.js'
 </script>
 
-<GlobalData {regions} />
+<GlobalData />
 <RegionFilter />
 <div class="grid lg:grid-cols-3 gap-4">
-  {#each regions as region}
+  {#each $regions as region}
     <RegionData {region} />
   {/each}
 </div>

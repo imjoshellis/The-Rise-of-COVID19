@@ -3,7 +3,7 @@
   import RegionSquare from './RegionSquare.svelte'
   import { dateIdx } from '../stores.js'
 
-  export let regions
+  const regions = Object.keys(data.regions).sort()
 
   const rnd5 = x => Math.round(x * 10000) / 10000
   const rnd2 = x => Math.round(x * 100) / 100
