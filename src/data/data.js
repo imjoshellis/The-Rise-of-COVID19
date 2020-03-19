@@ -2,6 +2,21 @@ import confirmedData from './COVID19/time_series_19-covid-Confirmed.csv'
 // import recovered from '../data/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv'
 // import population from '../data/Population_by_Country_2018.csv'
 
+const apiURL = 'https://coronavirus-tracker-api.herokuapp.com/v2/locations?timelines=1'
+
+const getApi = async () => {
+  const response = await fetch(apiURL, {
+    headers: {}
+  })
+  const apiData = await response.json()
+  // apiData.data.covid19Stats.forEach(o => {
+  // chartData.push({ label: o.country, value: o.confirmed })
+  // })
+  console.log(apiData)
+  // console.log(data.data.covid19Stats)
+  // console.log(chartData)
+}
+
 export const confirmed = confirmedData
 
 export const last = function (array, n) {
@@ -128,6 +143,7 @@ const renameUS = () => {
   delete data.regions.US // Delete old key
 }
 
+getApi()
 parseData()
 renameUS()
 export default data
