@@ -1,5 +1,6 @@
 <script>
   import data, { last } from '../data/data.js'
+  import { dateIdx } from '../stores.js'
   import Slope from './Slope.svelte'
 
   export let region
@@ -10,20 +11,20 @@
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   const redGreen = (x, y) => (x > y ? 'text-red-500' : 'text-green-500')
 
-  const recent = last(data.regions[region].total.confirmed, 4)
-  const today = recent[3]
-  const yesterday = recent[2]
-  const twoAgo = recent[1]
-  const threeAgo = recent[0]
+  $: recent = last(data.regions[region].total.confirmed.slice(0, $dateIdx), 4)
+  $: today = recent[3]
+  $: yesterday = recent[2]
+  $: twoAgo = recent[1]
+  $: threeAgo = recent[0]
 
-  const nowRate = today / yesterday
-  const prevRate = yesterday / twoAgo
-  const prevprevRate = twoAgo / threeAgo
+  $: nowRate = today / yesterday
+  $: prevRate = yesterday / twoAgo
+  $: prevprevRate = twoAgo / threeAgo
 
-  const deltaRate = rnd2(nowRate) / rnd2(prevRate)
-  const prevDeltaRate = rnd2(prevRate) / rnd2(prevprevRate)
-  const week = today * Math.pow(nowRate, 7)
-  const thirtyDays = today * Math.pow(nowRate, 30)
+  $: deltaRate = rnd2(nowRate) / rnd2(prevRate)
+  $: prevDeltaRate = rnd2(prevRate) / rnd2(prevprevRate)
+  $: week = today * Math.pow(nowRate, 7)
+  $: thirtyDays = today * Math.pow(nowRate, 30)
 </script>
 
 <style type="text/scss">
@@ -54,9 +55,10 @@
   }
 </style>
 
-<div class="flex flex-col">
-  <h3>{region === 'US' ? 'United States (USA)' : region}</h3>
-  {#if nowRate !== Infinity && prevRate !== Infinity}
+{#if nowRate > 0 && nowRate !== Infinity && prevRate !== Infinity}
+  <div class="flex flex-col">
+    <h3>{region === 'US' ? 'United States (US)' : region}</h3>
+
     <div class="flex flex-row">
       <div class="chart-wrap">
         <div class="chart-div">
@@ -78,7 +80,6 @@
 
       </div>
     </div>
-  {:else}
-    <div class="data-div">Not enough data available yet</div>
-  {/if}
-</div>
+
+  </div>
+{/if}

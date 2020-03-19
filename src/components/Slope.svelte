@@ -5,10 +5,10 @@
   export let growing
   export let nowRate
 
-  let yValue = nowRate * 50
-  let yUp = (0 - 1) * yValue + 50 + ''
-  let yDown = yValue + 50 + ''
-  let color = growing ? 'text-red-500' : 'text-green-500'
+  $: yValue = nowRate * 50
+  $: yUp = (0 - 1) * yValue + 50 + ''
+  $: yDown = yValue + 50 + ''
+  $: color = growing ? 'text-red-500' : 'text-green-500'
 </script>
 
 <style type="text/scss">

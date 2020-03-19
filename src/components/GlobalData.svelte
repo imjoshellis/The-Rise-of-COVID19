@@ -1,34 +1,36 @@
 <script>
   import data, { last } from '../data/data.js'
   import RegionSquare from './RegionSquare.svelte'
+  import { dateIdx } from '../stores.js'
 
-  export let regions
+  const allRegions = Object.keys(data.regions).sort()
 
+  const rnd5 = x => Math.round(x * 10000) / 10000
   const rnd2 = x => Math.round(x * 100) / 100
   const rnd0 = x => Math.round(x)
 
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   const redGreen = (x, y) => (x > y ? 'text-red-500' : 'text-green-500')
 
-  const recent = last(data.confirmed, 4)
-  const today = recent[3]
-  const yesterday = recent[2]
-  const twoAgo = recent[1]
-  const threeAgo = recent[0]
+  $: recent = last(data.confirmed.slice(0, $dateIdx), 4)
+  $: today = recent[3]
+  $: yesterday = recent[2]
+  $: twoAgo = recent[1]
+  $: threeAgo = recent[0]
 
-  const nowRate = today / yesterday
-  const prevRate = yesterday / twoAgo
-  const prevprevRate = twoAgo / threeAgo
+  $: nowRate = today / yesterday
+  $: prevRate = yesterday / twoAgo
+  $: prevprevRate = twoAgo / threeAgo
 
-  const deltaRate = rnd2(nowRate) / rnd2(prevRate)
-  const prevDeltaRate = rnd2(prevRate) / rnd2(prevprevRate)
-  const week = today * Math.pow(nowRate, 7)
-  const thirtyDays = today * Math.pow(nowRate, 30)
+  $: deltaRate = rnd5(nowRate) / rnd5(prevRate)
+  $: prevDeltaRate = rnd5(prevRate) / rnd5(prevprevRate)
+  $: week = today * Math.pow(nowRate, 7)
+  $: thirtyDays = today * Math.pow(nowRate, 30)
 
-  let yValue = nowRate * 50
-  let yUp = (0 - 1) * yValue + 50 + ''
-  let yDown = yValue + 50 + ''
-  let color = deltaRate > 1 ? 'text-red-500' : 'text-green-500'
+  $: yValue = nowRate * 50
+  $: yUp = (0 - 1) * yValue + 50 + ''
+  $: yDown = yValue + 50 + ''
+  $: color = deltaRate > 1 ? 'text-red-500' : 'text-green-500'
 </script>
 
 <style type="text/scss">
@@ -97,9 +99,9 @@
         </div>
         <div class="data-div">
           <h4>Rate of Growth</h4>
-          <div class="data-text {redGreen(nowRate, prevRate)}">{arrow(nowRate, prevRate)} Today: {rnd2(nowRate)}</div>
-          <div class="data-subtext">{arrow(prevRate, prevprevRate)} Yesterday: {rnd2(prevRate)}</div>
-          <div class="data-subtext">{arrow(deltaRate, prevDeltaRate)} Rate of Rate: {rnd2(deltaRate)}</div>
+          <div class="data-text {redGreen(nowRate, prevRate)}">{arrow(nowRate, prevRate)} Today: {rnd5(nowRate)}</div>
+          <div class="data-subtext">{arrow(prevRate, prevprevRate)} Yesterday: {rnd5(prevRate)}</div>
+          <div class="data-subtext">{arrow(deltaRate, prevDeltaRate)} Rate of Rate: {rnd5(deltaRate)}</div>
         </div>
         <div class="data-div">
           <h4>Future Based on Today's Rate</h4>
@@ -110,7 +112,7 @@
     </div>
   </div>
   <div class="region-squares">
-    {#each regions as region}
+    {#each allRegions as region}
       <RegionSquare {region} />
     {/each}
   </div>
