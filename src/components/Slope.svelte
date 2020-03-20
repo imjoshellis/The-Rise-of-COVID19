@@ -1,13 +1,12 @@
 <script>
   import { last } from '../data/data.js'
 
-  export let growing
+  export let color
   export let nowRate
 
   $: yValue = nowRate * 50
   $: yUp = (0 - 1) * yValue + 50 + ''
   $: yDown = yValue + 50 + ''
-  $: color = growing ? 'text-red-500' : 'text-green-500'
 </script>
 
 <style type="text/scss">

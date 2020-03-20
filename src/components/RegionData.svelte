@@ -8,18 +8,20 @@
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   const redGreen = (x, y) => {
     const diff = x / y
-    if (diff > 1.25) {
-      return 'text-red-700 font-bold'
-    } else if (diff > 1) {
-      return 'text-red-400'
-    } else if (x === y) {
-      return 'text-yellow-500'
-    } else if (diff < 0.75) {
-      return 'text-green-700 font-bold'
-    } else if (diff < 1) {
-      return 'text-green-400'
+    if (today > 0) {
+      if (today === yesterday) {
+        return 'text-gray-500'
+      } else if (diff > 1) {
+        return 'text-red-500'
+      } else if (x === y) {
+        return 'text-orange-500'
+      } else if (diff < 1) {
+        return 'text-yellow-500'
+      } else {
+        return 'text-gray-600'
+      }
     } else {
-      return 'text-yellow-500'
+      return 'text-gray-600'
     }
   }
 
@@ -73,7 +75,7 @@
     <div class="flex flex-row">
       <div class="chart-wrap">
         <div class="chart-div">
-          <Slope {nowRate} growing={deltaRate > 1} />
+          <Slope {nowRate} color={redGreen(nowRate, prevRate)} />
         </div>
       </div>
       <div class="data-div">
