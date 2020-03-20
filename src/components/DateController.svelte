@@ -1,105 +1,152 @@
 <script>
-  import { dateValue, dateIdx, dateMax } from '../data/stores.js'
+  import { dates, dateValue, dateIdx, dateMax } from '../data/stores.js'
+  import noUiSlider from 'nouislider'
+  import { onMount } from 'svelte'
+
+  let slider
 
   const increaseDate = () => {
-    $dateIdx < $dateMax ? ($dateIdx += 1) : $dateIdx
+    $dateIdx += 1
   }
 
   const decreaseDate = () => {
-    $dateIdx > 4 ? ($dateIdx -= 1) : $dateIdx
+    $dateIdx -= 1
+  }
+
+  $: playing = false
+  $: disabled = $dateIdx === $dateMax
+  $: playButtonClass = 'bg-green-500'
+  let interval
+
+  const togglePlay = () => {
+    playing = !playing
+    playButtonClass = playing ? 'bg-red-500' : 'bg-green-500'
+    if (playing) {
+      interval = setInterval(() => {
+        if ($dateIdx != $dateMax) {
+          console.log('tick')
+          $dateIdx++
+        } else {
+          clearInterval(interval)
+          playing = false
+        }
+      }, 250)
+    } else {
+      clearInterval(interval)
+    }
   }
 
   $: currentDate = $dateValue.toLocaleDateString()
+
+  onMount(() => {
+    noUiSlider.create(slider, {
+      padding: [4, 0],
+      range: {
+        min: 0,
+        max: $dateMax
+      },
+      start: $dateIdx,
+      connect: 'lower'
+    })
+
+    slider.noUiSlider.on('update', value => {
+      $dateIdx = Math.round(value)
+    })
+
+    dateIdx.subscribe(v => {
+      slider.noUiSlider.set(v)
+    })
+
+    feather.replace()
+  })
 </script>
 
 <style type="text/css">
   button {
-    @apply rounded px-2 py-1 m-4;
-  }
-  input[type='range'] {
-    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    width: 100%; /* Specific width is required for Firefox. */
-    background: transparent; /* Otherwise white in Chrome */
+    @apply rounded px-2 py-1 mx-1 border-none text-gray-500 transition-all duration-200 ease-out;
   }
 
-  input[type='range']::-webkit-slider-thumb {
-    -webkit-appearance: none;
+  button svg {
+    @apply fill-current;
   }
 
-  input[type='range']:focus {
-    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+  button:hover {
+    @apply ease-in;
   }
 
-  input[type='range']::-ms-track {
-    width: 100%;
-    cursor: pointer;
-
-    /* Hides the slider so custom styles can be added */
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
+  button:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+    @apply bg-gray-800;
   }
 
-  /* THUMB */
-  /* Special styling for WebKit/Blink */
-  input[type='range']::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    @apply cursor-pointer bg-gray-200 rounded h-4 w-4 border-solid border-gray-400 border;
-    margin-top: -4px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  button:disabled svg {
+    @apply stroke-current text-gray-600;
   }
 
-  /* All the same stuff for Firefox */
-  input[type='range']::-moz-range-thumb {
-    @apply cursor-pointer bg-gray-200 rounded h-4 w-4 border-solid border-gray-400 border;
+  .skip {
+    @apply rounded px-1 py-1 mx-0;
   }
 
-  /* All the same stuff for IE */
-  input[type='range']::-ms-thumb {
-    @apply cursor-pointer bg-gray-200 rounded h-4 w-4 border-solid border-gray-400 border;
-  }
-
-  /* TRACK */
-  input[type='range']::-webkit-slider-runnable-track {
-    width: 100%;
-    @apply bg-gray-700 rounded-sm h-2 cursor-pointer;
-  }
-
-  input[type='range']:focus::-webkit-slider-runnable-track {
-    @apply bg-gray-600;
-  }
-
-  input[type='range']::-moz-range-track {
-    width: 100%;
-    @apply bg-gray-700 rounded-sm h-2 cursor-pointer;
-  }
-
-  input[type='range']::-ms-track {
-    width: 100%;
-    @apply bg-gray-700 rounded-sm h-2 cursor-pointer;
-    background: transparent;
-    color: transparent;
-  }
-  input[type='range']::-ms-fill-lower {
-    @apply bg-gray-700 rounded-sm h-2 cursor-pointer;
-  }
-  input[type='range']:focus::-ms-fill-lower {
-    @apply bg-gray-600;
-  }
-  input[type='range']::-ms-fill-upper {
-    @apply bg-gray-700 rounded-sm h-2 cursor-pointer;
-  }
-  input[type='range']:focus::-ms-fill-upper {
-    @apply bg-gray-600;
+  .skip:hover {
+    @apply bg-gray-500;
   }
 
   controls {
-    @apply flex flex-row justify-center items-center;
+    @apply flex flex-row ml-2 justify-center items-center;
   }
 </style>
 
-<controls>
-  <button on:click={decreaseDate}>‹</button>
-  <input type="range" bind:value={$dateIdx} min="4" max={$dateMax} />
-  <button on:click={increaseDate}>›</button>
-  <div>Day {$dateIdx}: {currentDate}</div>
-</controls>
+<div class="flex flex-col w-full">
+  <controls>
+    <button class="skip" on:click={() => ($dateIdx = 0)}>
+      <i style="height:1.25rem;width:1.25rem;" data-feather="skip-back" />
+    </button>
+    <button class="skip" on:click={decreaseDate}>
+      <i style="height:1.25rem;width:1.25rem;" data-feather="rewind" />
+    </button>
+    <div class="w-full h-2 ml-4 mr-5" bind:this={slider} />
+    <button
+      class={playing ? 'text-red-200 bg-red-500' : 'text-green-200 bg-green-500'}
+      {disabled}
+      on:click={togglePlay}>
+      {#if playing}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-pause">
+          <rect x="6" y="4" width="4" height="16" />
+          <rect x="14" y="4" width="4" height="16" />
+        </svg>
+      {:else}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-play">
+          <polygon points="5 3 19 12 5 21 5 3" />
+        </svg>
+      {/if}
+    </button>
+    <button class="skip" on:click={increaseDate}>
+      <i style="height:1.25rem;width:1.25rem;" data-feather="fast-forward" />
+    </button>
+    <button class="skip" on:click={() => ($dateIdx = $dateMax)}>
+      <i style="height:1.25rem;width:1.25rem;" data-feather="skip-forward" />
+    </button>
+  </controls>
+  <div class="w-48 mx-auto ">Day {$dateIdx + 1}: {currentDate}</div>
+</div>
