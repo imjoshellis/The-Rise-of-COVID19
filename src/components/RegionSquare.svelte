@@ -4,7 +4,25 @@
 
   export let country
 
-  const redGreen = (x, y) => (x > y ? 'bg-red-500' : 'bg-green-500')
+  let display = true
+
+  const redGreen = (x, y) => {
+    const diff = x / y
+    display = true
+    if (diff > 1.25) {
+      return 'bg-red-700 font-bold'
+    } else if (diff > 1) {
+      return 'bg-red-400'
+    } else if (x === y) {
+      return 'bg-yellow-500'
+    } else if (diff < 0.75) {
+      return 'bg-green-700 font-bold'
+    } else if (diff < 1) {
+      return 'bg-green-400'
+    } else {
+      display = false
+    }
+  }
 
   $: recent = last($dates.slice(0, $dateIdx), 4)
   $: today = $data.countries[country].total.confirmed[recent[3]]
@@ -52,6 +70,8 @@
   }
 </style>
 
-<div class="region-square tooltip {color}">
-  <span class="tooltiptext">{country}</span>
-</div>
+{#if display}
+  <div class="region-square tooltip {color}">
+    <span class="tooltiptext">{country}</span>
+  </div>
+{/if}
