@@ -71,6 +71,6 @@
       this doesn't necessarily mean the outbreak is over since there could still be people actively recovering or cases
       that are undiscovered.
     </p>
-    <a on:click={toggleAbout} class="text-xs">( close this message )</a>
+    <span on:click={toggleAbout} class="text-xs cursor-pointer">( close this message )</span>
   </div>
 </div>
