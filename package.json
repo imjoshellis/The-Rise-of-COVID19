@@ -1,5 +1,5 @@
 {
-  "name": "covid-curves",
+  "name": "the-rise-of-covid-19",
   "version": "0.2.0",
   "scripts": {
     "build": "rollup -c",
