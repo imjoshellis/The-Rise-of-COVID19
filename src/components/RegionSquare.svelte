@@ -16,16 +16,20 @@
 
   const redGreen = (x, y) => {
     const diff = x / y
-    if (today === yesterday && today > 0) {
-      return 'border-green-600 bg-green-700 text-green-500 font-bold'
-    } else if (diff > 1) {
-      return 'border-red-600 bg-red-700'
-    } else if (x === y) {
-      return 'border-orange-500 bg-orange-600'
-    } else if (diff < 1) {
-      return 'border-yellow-400 bg-yellow-500'
+    if (today > 0) {
+      if (today === yesterday) {
+        return 'border-gray-700 bg-gray-800'
+      } else if (diff > 1) {
+        return 'border-red-600 bg-red-700'
+      } else if (x === y) {
+        return 'border-orange-500 bg-orange-600'
+      } else if (diff < 1) {
+        return 'border-yellow-500 bg-yellow-600'
+      } else {
+        return 'border-gray-800 bg-gray-900'
+      }
     } else {
-      return 'border-gray-700 bg-gray-800'
+      return 'border-gray-800 bg-gray-900'
     }
   }
 
