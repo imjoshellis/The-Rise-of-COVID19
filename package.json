@@ -32,7 +32,6 @@
     "tailwindcss": "^1.2.0"
   },
   "dependencies": {
-    "feather-icons": "^4.26.0",
     "node-sass": "^4.13.1",
     "nouislider": "^14.1.1",
     "sass": "^1.26.3",
