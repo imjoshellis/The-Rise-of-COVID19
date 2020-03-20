@@ -4,15 +4,8 @@
   import DateController from './components/DateController.svelte'
   import GlobalData from './components/GlobalData.svelte'
   import RegionFilter from './components/RegionFilter.svelte'
-  import { onMount } from 'svelte'
-  import data from './data/data.js'
-
-  let regions = Object.keys(data.regions).sort()
+  import { regions } from './data/stores.js'
 </script>
-
-<style>
-
-</style>
 
 <Tailwindcss />
 <div class="flex flex-row items-center justify-beween">
