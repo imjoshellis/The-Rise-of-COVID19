@@ -37,8 +37,10 @@
     </div>
   </div>
 
-  <div class="my-8">
-    <GlobalData />
+  <div class="px-16">
+    <div class="my-8">
+      <GlobalData />
+    </div>
+    <RegionGrid />
   </div>
-  <RegionGrid />
 {/await}
