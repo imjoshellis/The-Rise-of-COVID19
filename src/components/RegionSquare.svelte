@@ -4,24 +4,41 @@
 
   export let country
 
-  const redGreen = (x, y) => (x > y ? 'bg-red-500' : 'bg-green-500')
+  let display = true
 
   $: recent = last($dates.slice(0, $dateIdx), 4)
   $: today = $data.countries[country].total.confirmed[recent[3]]
   $: yesterday = $data.countries[country].total.confirmed[recent[2]]
   $: twoAgo = $data.countries[country].total.confirmed[recent[1]]
 
-  $: nowRate = today / yesterday
-  $: prevRate = yesterday / twoAgo
+  $: nowRate = (today / yesterday).toPrecision(3)
+  $: prevRate = (yesterday / twoAgo).toPrecision(3)
+
+  const redGreen = (x, y) => {
+    const diff = x / y
+    if (today > 0) {
+      if (today === yesterday) {
+        return 'border-gray-700 bg-gray-800'
+      } else if (diff > 1) {
+        return 'border-red-600 bg-red-700'
+      } else if (x === y) {
+        return 'border-orange-500 bg-orange-600'
+      } else if (diff < 1) {
+        return 'border-yellow-500 bg-yellow-600'
+      } else {
+        return 'border-gray-800 bg-gray-900'
+      }
+    } else {
+      return 'border-gray-800 bg-gray-900'
+    }
+  }
 
   $: color = redGreen(nowRate, prevRate)
 </script>
 
 <style type="text/scss">
   .region-square {
-    width: 0.75rem;
-    height: 0.75rem;
-    @apply mr-1 mb-1 rounded-sm transition-all duration-200 ease-in-out;
+    @apply w-4 h-4 mr-1 mb-1 rounded-sm border-solid border-2 transition-all duration-200 ease-in-out;
   }
 
   /* Tooltip container */
@@ -52,6 +69,8 @@
   }
 </style>
 
-<div class="region-square tooltip {color}">
-  <span class="tooltiptext">{country}</span>
-</div>
+{#if display}
+  <div class="region-square tooltip text-xs {color}">
+    <span class="tooltiptext">{country}</span>
+  </div>
+{/if}

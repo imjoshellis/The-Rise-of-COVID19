@@ -30,7 +30,7 @@
           clearInterval(interval)
           playing = false
         }
-      }, 250)
+      }, 400)
     } else {
       clearInterval(interval)
     }

@@ -58,18 +58,14 @@
       If an item is red, that means the amount of new confirmed cases (growth rate) is worse (larger) today than
       yesterday.
     </p>
-    <h4 class="font-bold text-green-500">Green</h4>
-    <p>
-      If an item is green, it means the amount of new confirmed cases (growth rate) is better (lower) today. Green does
-      not necessarily mean that the growth rate is "good" -- just that it's better than yesterday.
-    </p>
-    <h4 class="font-bold text-blue-500">Blue</h4>
-    <p>If an item is blue, that means there were no new reported cases in that area in the past day.</p>
+    <h4 class="font-bold text-orange-500">Orange</h4>
+    <p>If an item is orange, that means the amount of new cases today is equal to the new cases yesterday.</p>
+    <h4 class="font-bold text-yellow-500">Yellow</h4>
+    <p>If an item is yellow, it means the amount of new confirmed cases (growth rate) is better (lower) today.</p>
     <h4 class="font-bold text-gray-500">Gray</h4>
     <p>
-      If an item is gray, that means there were no new cases in the past 7 days. Note that while this is a great sign,
-      this doesn't necessarily mean the outbreak is over since there could still be people actively recovering or cases
-      that are undiscovered.
+      If an item is light gray, that means there were no new cases. If it is dark gray, there isn't enough data yet for
+      the model to work correctly.
     </p>
     <span on:click={toggleAbout} class="text-xs cursor-pointer">( close this message )</span>
   </div>

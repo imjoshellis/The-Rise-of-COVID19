@@ -64,7 +64,7 @@
   }
 
   .region-squares {
-    @apply flex flex-col flex-wrap h-12 items-center justify-start content-center;
+    @apply flex flex-col flex-wrap h-16 items-center justify-start content-center;
   }
 </style>
 
