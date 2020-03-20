@@ -30,9 +30,6 @@
 {:then data}
   <Header />
   <div class="flex flex-row items-center justify-beween">
-    <div>
-      <RegionFilter />
-    </div>
     <div class="flex-grow">
       <DateController />
     </div>
