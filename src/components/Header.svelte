@@ -4,7 +4,7 @@
   import SocialButtons from './SocialButtons.svelte'
   import Nav from './Nav.svelte'
 
-  $: about = true
+  $: about = false
   const toggleAbout = () => {
     about = !about
   }

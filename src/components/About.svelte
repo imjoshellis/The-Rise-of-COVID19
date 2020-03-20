@@ -38,19 +38,21 @@
       </svg>
     </button>
   </div>
-  <div class="content">
+  <div class="content text-gray-300">
+    <h3 class="font-bold text-lg">Data Source</h3>
     <p>
-      This tool is designed to highlight the day-over-day growth rate of COVID-19 in various regions. It processes data
-      from the
+      This tool is designed to visualize and compare the day-over-day growth rate of COVID-19 in various regions. It
+      processes data from the
       <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">Johns Hopkins Github repository,</a>
       which is updated daily.
     </p>
     <p>
-      It is important to note that the calculations (espeically "confirmed cases in 7 days based on current rate") can
-      be
+      It is important to note that the calculations (especially future projections) can be
       <span class="font-bold text-red-500">extremely volatile,</span>
-      meaning they can change dramatically day-to-day for a variety of reasons. Make conclusions at your own risk.
+      meaning they can change dramatically day-to-day for a variety of reasons. Make conclusions at your own risk, and
+      use this tool wisely.
     </p>
+    <h3 class="font-bold text-lg">Colors</h3>
     <p>
       If an item is red, that means the amount of new confirmed cases (growth rate) is worse (larger) today than
       yesterday. If it's green, it means the amount of new confirmed cases (growth rate) is better (lower) today. Green
