@@ -4,7 +4,7 @@
   import DateController from './components/DateController.svelte'
   import GlobalData from './components/GlobalData.svelte'
   import RegionFilter from './components/RegionFilter.svelte'
-  import { regions } from './data/stores.js'
+  import { countries } from './data/stores.js'
 </script>
 
 <Tailwindcss />
@@ -20,4 +20,4 @@
 <div class="my-8">
   <GlobalData />
 </div>
-<RegionGrid {regions} />
+<RegionGrid {countries} />
