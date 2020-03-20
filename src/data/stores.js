@@ -3,13 +3,13 @@ import { derived, writable } from 'svelte/store'
 export const data = writable({})
 export const dates = writable([])
 
-export const regionStr = writable('')
-export const regions = derived([regionStr, data], ([$regionStr, $data]) => {
-  if ($regionStr === '') {
+export const countryStr = writable('')
+export const countries = derived([countryStr, data], ([$countryStr, $data]) => {
+  if ($countryStr === '') {
     return Object.keys($data.countries).sort()
   }
 
-  var re = new RegExp($regionStr, 'gi')
+  var re = new RegExp($countryStr, 'gi')
 
   return Object.keys($data.countries)
     .filter(word => word.match(re))
