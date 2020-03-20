@@ -3,17 +3,19 @@
   import noUiSlider from 'nouislider'
   import { onMount } from 'svelte'
 
+  let slider
+
   const increaseDate = () => {
     $dateIdx < $dateMax ? ($dateIdx += 1) : $dateIdx
+    slider.noUiSlider.set($dateIdx)
   }
 
   const decreaseDate = () => {
     $dateIdx > 4 ? ($dateIdx -= 1) : $dateIdx
+    slider.noUiSlider.set($dateIdx)
   }
 
   $: currentDate = $dateValue.toLocaleDateString()
-
-  let slider
 
   onMount(() => {
     noUiSlider.create(slider, {
@@ -44,14 +46,11 @@
   controls {
     @apply flex flex-row justify-center items-center;
   }
-
-  .slider {
-  }
 </style>
 
 <controls>
   <button on:click={decreaseDate}>‹</button>
   <div class="w-full h-2" bind:this={slider} />
   <button on:click={increaseDate}>›</button>
-  <div>Day {$dateIdx}: {currentDate}</div>
+  <div class="w-24">Day {$dateIdx}: {currentDate}</div>
 </controls>
