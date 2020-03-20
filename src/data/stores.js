@@ -19,4 +19,4 @@ export const countries = derived([countryStr, data], ([$countryStr, $data]) => {
 
 export const dateMax = writable(0)
 export const dateIdx = writable(0)
-export const dateValue = derived(dateIdx, $dateIdx => dates[$dateIdx])
+export const dateValue = derived([dates, dateIdx], ([$dates, $dateIdx]) => new Date($dates[$dateIdx]))

@@ -8,6 +8,8 @@
   const decreaseDate = () => {
     $dateIdx > 4 ? ($dateIdx -= 1) : $dateIdx
   }
+
+  $: currentDate = $dateValue.toLocaleDateString()
 </script>
 
 <style type="text/css">
@@ -99,5 +101,5 @@
   <button on:click={decreaseDate}>‹</button>
   <input type="range" bind:value={$dateIdx} min="4" max={$dateMax} />
   <button on:click={increaseDate}>›</button>
-  <div>Day {$dateIdx}: {$dateValue}</div>
+  <div>Day {$dateIdx}: {currentDate}</div>
 </controls>
