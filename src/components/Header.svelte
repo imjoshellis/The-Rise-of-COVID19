@@ -1,5 +1,10 @@
 <script>
   import RegionFilter from './RegionFilter.svelte'
+  import { onMount } from 'svelte'
+
+  onMount(() => {
+    feather.replace()
+  })
 </script>
 
 <style type="text/scss">
@@ -13,7 +18,12 @@
     <ul class="flex flex-row">
       <li on:press={reset}>Reset</li>
       <li on:press={about}>About</li>
-      <li on:press={contribute}>Contribute on GitHub</li>
+      <li on:press={contribute}>
+        <span>
+          <i data-feather="github" style="height:1.25rem;width:1.25rem;" />
+        </span>
+        <span>Contribute on GitHub</span>
+      </li>
     </ul>
   </nav>
   <RegionFilter />
