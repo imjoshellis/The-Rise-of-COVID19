@@ -1,15 +1,15 @@
 <script>
-  import data, { last } from '../data/data.js'
-  import { dateIdx } from '../stores.js'
+  import { last } from '../data/data.js'
+  import { dateIdx, data, dates } from '../data/stores.js'
 
-  export let region
+  export let country
 
   const redGreen = (x, y) => (x > y ? 'bg-red-500' : 'bg-green-500')
 
-  $: recent = last(data.regions[region].total.confirmed.slice(0, $dateIdx), 4)
-  $: today = recent[3]
-  $: yesterday = recent[2]
-  $: twoAgo = recent[1]
+  $: recent = last($dates.slice(0, $dateIdx), 4)
+  $: today = $data.countries[country].total.confirmed[recent[3]]
+  $: yesterday = $data.countries[country].total.confirmed[recent[2]]
+  $: twoAgo = $data.countries[country].total.confirmed[recent[1]]
 
   $: nowRate = today / yesterday
   $: prevRate = yesterday / twoAgo
@@ -53,5 +53,5 @@
 </style>
 
 <div class="region-square tooltip {color}">
-  <span class="tooltiptext">{region}</span>
+  <span class="tooltiptext">{country}</span>
 </div>
