@@ -1,5 +1,5 @@
 <script>
-  import { regions, regionStr } from '../stores.js'
+  import { regions, regionStr } from '../data/stores.js'
 </script>
 
 <style type="text/css">
