@@ -1,5 +1,5 @@
 <script>
-  import { regions, regionStr } from '../data/stores.js'
+  import { countryStr } from '../data/stores.js'
 </script>
 
 <style type="text/css">
@@ -12,4 +12,4 @@
   }
 </style>
 
-<input placeholder="Filter Countries by Name" type="text" name="region" id="region" bind:value={$regionStr} />
+<input placeholder="Filter Countries by Name" type="text" name="region" id="region" bind:value={$countryStr} />
