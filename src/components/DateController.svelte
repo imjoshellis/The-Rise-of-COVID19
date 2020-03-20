@@ -36,7 +36,9 @@
     }
   }
 
-  $: currentDate = $dateValue.toLocaleDateString()
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+  $: currentDate = months[$dateValue.getMonth()] + ' ' + $dateValue.getDate() + ', ' + $dateValue.getFullYear()
 
   onMount(() => {
     noUiSlider.create(slider, {
@@ -61,7 +63,7 @@
   })
 </script>
 
-<style type="text/css">
+<style type="text/scss">
   button {
     @apply rounded px-2 py-1 mx-1 border-none transition-all duration-200 ease-out;
   }
@@ -95,9 +97,17 @@
   controls {
     @apply flex flex-row justify-center items-center;
   }
+
+  .about-day-number {
+    @apply mr-1 text-xs self-start;
+
+    &:hover::after {
+      content: ' (of available data)';
+    }
+  }
 </style>
 
-<div class="flex flex-col w-full">
+<div class="flex flex-col mx-4">
   <controls>
     <button class="skip" on:click={() => ($dateIdx = 0)}>
       <i style="height:1.25rem;width:1.25rem;" data-feather="skip-back" />
@@ -148,5 +158,9 @@
       <i style="height:1.25rem;width:1.25rem;" data-feather="skip-forward" />
     </button>
   </controls>
-  <div class="w-48 mx-auto ">Day {$dateIdx + 1}: {currentDate}</div>
+  <div class="flex flex-row justify-center">
+    <div>Day {$dateIdx + 1}</div>
+    <div class="about-day-number">?</div>
+    <div>- {currentDate}</div>
+  </div>
 </div>
