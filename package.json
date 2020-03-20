@@ -1,5 +1,5 @@
 {
-  "name": "covid-slopes",
+  "name": "covid-curves",
   "version": "0.2.0",
   "scripts": {
     "build": "rollup -c",
