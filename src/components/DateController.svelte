@@ -36,7 +36,9 @@
     }
   }
 
-  $: currentDate = $dateValue.toLocaleDateString()
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+  $: currentDate = months[$dateValue.getMonth()] + ' ' + $dateValue.getDate() + $dateValue.getYear()
 
   onMount(() => {
     noUiSlider.create(slider, {
