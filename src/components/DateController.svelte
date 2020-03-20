@@ -63,7 +63,7 @@
 
 <style type="text/css">
   button {
-    @apply rounded px-2 py-1 mx-1 border-none text-gray-500 transition-all duration-200 ease-out;
+    @apply rounded px-2 py-1 mx-1 border-none transition-all duration-200 ease-out;
   }
 
   button svg {
@@ -85,15 +85,15 @@
   }
 
   .skip {
-    @apply rounded px-1 py-1 mx-0;
+    @apply rounded px-1 py-1 mx-0  text-gray-500;
   }
 
   .skip:hover {
-    @apply bg-gray-500;
+    @apply bg-gray-500  text-gray-200;
   }
 
   controls {
-    @apply flex flex-row ml-2 justify-center items-center;
+    @apply flex flex-row justify-center items-center;
   }
 </style>
 

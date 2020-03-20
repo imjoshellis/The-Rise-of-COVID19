@@ -7,6 +7,7 @@
   import GlobalData from './components/GlobalData.svelte'
   import RegionFilter from './components/RegionFilter.svelte'
   import Spinner from 'svelte-spinner'
+  import Header from './components/Header.svelte'
 
   const waitForApi = async () => {
     $data = await getApi()
@@ -27,10 +28,8 @@
     <div class="mr-16 text-2xl">Fetching data...</div>
   </div>
 {:then data}
+  <Header />
   <div class="flex flex-row items-center justify-beween">
-    <div>
-      <RegionFilter />
-    </div>
     <div class="flex-grow">
       <DateController />
     </div>
