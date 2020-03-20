@@ -16,21 +16,16 @@
 
   const redGreen = (x, y) => {
     const diff = x / y
-    display = true
     if (today === yesterday && today > 0) {
-      return 'bg-purple-600'
-    } else if (diff > 1.25) {
-      return 'bg-red-700'
+      return 'border-green-600 bg-green-700 text-green-500 font-bold'
     } else if (diff > 1) {
-      return 'bg-red-400'
+      return 'border-red-600 bg-red-700'
     } else if (x === y) {
-      return 'bg-yellow-500'
-    } else if (diff < 0.75) {
-      return 'bg-green-700'
+      return 'border-orange-500 bg-orange-600'
     } else if (diff < 1) {
-      return 'bg-green-400'
+      return 'border-yellow-400 bg-yellow-500'
     } else {
-      return 'bg-gray-800'
+      return 'border-gray-700 bg-gray-800'
     }
   }
 
@@ -39,9 +34,7 @@
 
 <style type="text/scss">
   .region-square {
-    width: 0.75rem;
-    height: 0.75rem;
-    @apply mr-1 mb-1 rounded-sm transition-all duration-200 ease-in-out;
+    @apply w-4 h-4 mr-1 mb-1 rounded-sm border-solid border-2 transition-all duration-200 ease-in-out;
   }
 
   /* Tooltip container */
@@ -73,7 +66,7 @@
 </style>
 
 {#if display}
-  <div class="region-square tooltip {color}">
+  <div class="region-square tooltip text-xs {color}">
     <span class="tooltiptext">{country}</span>
   </div>
 {/if}
