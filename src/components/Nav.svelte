@@ -1,5 +1,5 @@
 <script>
-  import { dateIdx, dateMax } from '../data/stores.js'
+  import { dateIdx, dateMax, countryStr } from '../data/stores.js'
   const reset = () => {
     $dateIdx = $dateMax
     $countryStr = ''
