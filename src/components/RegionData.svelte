@@ -1,6 +1,6 @@
 <script>
-  import data, { last } from '../data/data.js'
-  import { dateIdx } from '../data/stores.js'
+  import { last } from '../data/data.js'
+  import { dateIdx, data } from '../data/stores.js'
   import Slope from './Slope.svelte'
 
   export let region
@@ -11,7 +11,7 @@
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   const redGreen = (x, y) => (x > y ? 'text-red-500' : 'text-green-500')
 
-  $: recent = last(data.regions[region].total.confirmed.slice(0, $dateIdx), 4)
+  $: recent = last($data.countries[region].total.confirmed.slice(0, $dateIdx), 4)
   $: today = recent[3]
   $: yesterday = recent[2]
   $: twoAgo = recent[1]
