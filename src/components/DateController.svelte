@@ -93,7 +93,7 @@
   }
 
   controls {
-    @apply flex flex-row ml-2 justify-center items-center;
+    @apply flex flex-row justify-center items-center;
   }
 </style>
 
