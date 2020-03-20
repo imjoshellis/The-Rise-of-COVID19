@@ -7,12 +7,10 @@
 
   const increaseDate = () => {
     $dateIdx < $dateMax ? ($dateIdx += 1) : $dateIdx
-    slider.noUiSlider.set($dateIdx)
   }
 
   const decreaseDate = () => {
     $dateIdx > 4 ? ($dateIdx -= 1) : $dateIdx
-    slider.noUiSlider.set($dateIdx)
   }
 
   $: currentDate = $dateValue.toLocaleDateString()
@@ -30,6 +28,10 @@
 
     slider.noUiSlider.on('update', value => {
       $dateIdx = Math.round(value)
+    })
+
+    dateIdx.subscribe(v => {
+      slider.noUiSlider.set(v)
     })
   })
 </script>
