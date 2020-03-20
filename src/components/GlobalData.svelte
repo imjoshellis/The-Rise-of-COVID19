@@ -1,9 +1,7 @@
 <script>
   import { last } from '../data/data.js'
   import RegionSquare from './RegionSquare.svelte'
-  import { dateIdx, data } from '../data/stores.js'
-
-  const allRegions = Object.keys($data.countries).sort()
+  import { dateIdx, data, allCountries } from '../data/stores.js'
 
   const rnd5 = x => Math.round(x * 10000) / 10000
   const rnd2 = x => Math.round(x * 100) / 100

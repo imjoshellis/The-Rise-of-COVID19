@@ -4,6 +4,7 @@ export const data = writable({})
 export const dates = writable([])
 
 export const countryStr = writable('')
+export const allCountries = writable({})
 export const countries = derived([countryStr, data], ([$countryStr, $data]) => {
   if ($countryStr === '') {
     return Object.keys($data.countries).sort()
