@@ -1,5 +1,5 @@
 <script>
-  import data, { last } from '../data/data.js'
+  import { last } from '../data/data.js'
 
   export let growing
   export let nowRate
