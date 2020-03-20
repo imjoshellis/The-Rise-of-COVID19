@@ -71,6 +71,7 @@ textarea {
   height: 100%;
   position: relative;
   z-index: 1;
+  cursor: pointer;
 }
 /* Wrapper for all connect elements.
  */
@@ -135,6 +136,7 @@ textarea {
  */
 .noUi-horizontal {
   height: 18px;
+  cursor: pointer;
 }
 .noUi-horizontal .noUi-handle {
   width: 24px;
