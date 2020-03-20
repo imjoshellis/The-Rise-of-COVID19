@@ -17,7 +17,7 @@
 </style>
 
 <header>
-  <div class="text-3xl text-gray-300 font-bold whitespace-no-wrap pr-4 py-2">Covid Curves</div>
+  <div class="text-2xl text-gray-300 font-bold whitespace-no-wrap pr-4 py-2">The Rise of Covid</div>
   <Nav {toggleAbout} />
   <RegionFilter />
   <SocialButtons />
