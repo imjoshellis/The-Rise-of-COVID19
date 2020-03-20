@@ -34,7 +34,11 @@
 
 <style type="text/css">
   button {
-    @apply rounded px-2 py-1 m-4;
+    @apply rounded px-2 py-1 mx-6 bg-gray-700 border-none transition-all duration-200 ease-out;
+  }
+
+  button:hover {
+    @apply bg-gray-500 ease-in;
   }
 
   controls {

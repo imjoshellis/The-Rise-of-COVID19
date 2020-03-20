@@ -205,8 +205,15 @@ button:focus {
 }
 .noUi-handle {
   border-radius: 2px;
-  background: #a1afc0;
+  background: #9c9ea1;
   cursor: default;
+  transition: all .25s ease-out;
+  cursor: pointer;
+}
+
+.noUi-handle:hover {
+  transition: ease-in;
+  background: #bbbdbf;
 }
 
 .noUi-handle:focus {
