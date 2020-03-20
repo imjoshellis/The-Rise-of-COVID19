@@ -1,6 +1,6 @@
 <script>
   import data, { last } from '../data/data.js'
-  import { dateIdx } from '../stores.js'
+  import { dateIdx } from '../data/stores.js'
   import Slope from './Slope.svelte'
 
   export let region
