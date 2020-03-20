@@ -1,5 +1,5 @@
 <script>
-  import { dateValue, dateIdx, dateMax } from '../stores.js'
+  import { dateValue, dateIdx, dateMax } from '../data/stores.js'
 
   const increaseDate = () => {
     $dateIdx < $dateMax ? ($dateIdx += 1) : $dateIdx

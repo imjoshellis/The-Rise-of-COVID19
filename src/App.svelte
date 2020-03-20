@@ -1,30 +1,43 @@
 <script>
+  import { data, dates, dateMax, dateIdx, allCountries } from './data/stores.js'
+  import getApi from './data/data.js'
   import Tailwindcss from './Tailwindcss.svelte'
   import RegionGrid from './components/RegionGrid.svelte'
   import DateController from './components/DateController.svelte'
   import GlobalData from './components/GlobalData.svelte'
   import RegionFilter from './components/RegionFilter.svelte'
-  import { onMount } from 'svelte'
-  import data from './data/data.js'
+  import Spinner from 'svelte-spinner'
 
-  let regions = Object.keys(data.regions).sort()
+  const waitForApi = async () => {
+    $data = await getApi()
+    $dates = await Object.keys($data.confirmed)
+    $dateMax = (await $dates.length) - 1
+    $dateIdx = await $dateMax
+    $allCountries = await Object.keys($data.countries).sort()
+    return $data
+  }
+
+  let promise = waitForApi()
 </script>
 
-<style>
-
-</style>
-
 <Tailwindcss />
-<div class="flex flex-row items-center justify-beween">
-  <div>
-    <RegionFilter />
+{#await promise}
+  <div class="w-full h-full flex flex row items-center justify-center">
+    <Spinner size="48" speed="500" color="#404244" thickness="2" gap="40" />
+    <div class="mr-16 text-2xl">Fetching data...</div>
   </div>
-  <div class="flex-grow">
-    <DateController />
+{:then data}
+  <div class="flex flex-row items-center justify-beween">
+    <div>
+      <RegionFilter />
+    </div>
+    <div class="flex-grow">
+      <DateController />
+    </div>
   </div>
-</div>
 
-<div class="my-8">
-  <GlobalData />
-</div>
-<RegionGrid {regions} />
+  <div class="my-8">
+    <GlobalData />
+  </div>
+  <RegionGrid />
+{/await}
