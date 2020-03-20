@@ -63,7 +63,11 @@
 
 <style type="text/css">
   button {
-    @apply rounded px-2 py-1 mx-1 border-none transition-all duration-200 ease-out;
+    @apply rounded px-2 py-1 mx-1 border-none text-gray-500 transition-all duration-200 ease-out;
+  }
+
+  button svg {
+    @apply fill-current;
   }
 
   button:hover {
@@ -73,6 +77,11 @@
   button:disabled {
     opacity: 0.75;
     cursor: not-allowed;
+    @apply bg-gray-800;
+  }
+
+  button:disabled svg {
+    @apply stroke-current text-gray-600;
   }
 
   .skip {
@@ -97,7 +106,10 @@
       <i style="height:1.25rem;width:1.25rem;" data-feather="rewind" />
     </button>
     <div class="w-full h-2 ml-4 mr-5" bind:this={slider} />
-    <button class={playing ? 'bg-red-500' : 'bg-green-500'} {disabled} on:click={togglePlay}>
+    <button
+      class={playing ? 'text-red-200 bg-red-500' : 'text-green-200 bg-green-500'}
+      {disabled}
+      on:click={togglePlay}>
       {#if playing}
         <svg
           xmlns="http://www.w3.org/2000/svg"
