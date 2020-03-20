@@ -17,13 +17,13 @@
 
   onMount(() => {
     noUiSlider.create(slider, {
+      padding: [4, 0],
       range: {
         min: 0,
         max: $dateMax
       },
       start: $dateIdx,
-      connect: 'lower',
-      pips: { mode: 'count', values: 5 }
+      connect: 'lower'
     })
 
     slider.noUiSlider.on('update', value => {
