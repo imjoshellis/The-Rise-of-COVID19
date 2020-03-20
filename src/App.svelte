@@ -6,6 +6,7 @@
   import DateController from './components/DateController.svelte'
   import GlobalData from './components/GlobalData.svelte'
   import RegionFilter from './components/RegionFilter.svelte'
+  import Spinner from 'svelte-spinner'
 
   const waitForApi = async () => {
     $data = await getApi()
@@ -21,7 +22,10 @@
 
 <Tailwindcss />
 {#await promise}
-  <div>Fetching data...</div>
+  <div class="w-full h-full flex flex row items-center justify-center">
+    <Spinner size="48" speed="500" color="#404244" thickness="2" gap="40" />
+    <div class="mr-16 text-2xl">Fetching data...</div>
+  </div>
 {:then data}
   <div class="flex flex-row items-center justify-beween">
     <div>
