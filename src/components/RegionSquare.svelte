@@ -20,7 +20,7 @@
     } else if (diff < 1) {
       return 'bg-green-400'
     } else {
-      display = false
+      return 'bg-gray-800'
     }
   }
 
