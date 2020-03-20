@@ -53,18 +53,23 @@ const parseApi = apiData => {
       }
     }
   }
-  console.log(data)
 }
 
-const getApi = async () => {
+const renameUS = () => {
+  data.countries['United States (USA)'] = data.countries.US // Assign new key
+  delete data.countries.US // Delete old key
+}
+
+export const getApi = async () => {
   const response = await fetch(apiURL, {
     headers: {}
   })
 
   const apiData = await response.json()
-  console.log(apiData)
 
   await parseApi(apiData)
+  await renameUS()
+  return data
 }
 
 export const last = function (array, n) {
@@ -72,11 +77,3 @@ export const last = function (array, n) {
   if (n == null) return array[array.length - 1]
   return array.slice(Math.max(array.length - n, 0))
 }
-
-// const renameUS = () => {
-//   data.regions['United States (USA)'] = data.regions.US // Assign new key
-//   delete data.regions.US // Delete old key
-// }
-
-getApi()
-export default data
