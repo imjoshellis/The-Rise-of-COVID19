@@ -97,7 +97,7 @@
   }
 </style>
 
-<div class="flex flex-col w-full">
+<div class="flex flex-col mx-4">
   <controls>
     <button class="skip" on:click={() => ($dateIdx = 0)}>
       <i style="height:1.25rem;width:1.25rem;" data-feather="skip-back" />
