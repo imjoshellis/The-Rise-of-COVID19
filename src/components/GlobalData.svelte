@@ -1,7 +1,7 @@
 <script>
   import data, { last } from '../data/data.js'
   import RegionSquare from './RegionSquare.svelte'
-  import { dateIdx } from '../stores.js'
+  import { dateIdx } from '../data/stores.js'
 
   const allRegions = Object.keys(data.regions).sort()
 
