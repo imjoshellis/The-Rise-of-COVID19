@@ -1,9 +1,9 @@
 <script>
-  import data, { last } from '../data/data.js'
+  import { last } from '../data/data.js'
   import RegionSquare from './RegionSquare.svelte'
-  import { dateIdx } from '../data/stores.js'
+  import { dateIdx, data } from '../data/stores.js'
 
-  const allRegions = Object.keys(data.regions).sort()
+  const allRegions = Object.keys($data.countries).sort()
 
   const rnd5 = x => Math.round(x * 10000) / 10000
   const rnd2 = x => Math.round(x * 100) / 100
@@ -12,7 +12,7 @@
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   const redGreen = (x, y) => (x > y ? 'text-red-500' : 'text-green-500')
 
-  $: recent = last(data.confirmed.slice(0, $dateIdx), 4)
+  $: recent = last($data.confirmed.slice(0, $dateIdx), 4)
   $: today = recent[3]
   $: yesterday = recent[2]
   $: twoAgo = recent[1]
