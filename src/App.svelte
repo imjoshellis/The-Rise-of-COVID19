@@ -1,23 +1,24 @@
 <script>
-  import { data, dates, dateMax, dateIdx, allCountries } from './stores.js'
+  import { data, dates, dateMax, dateIdx, allCountries } from './data/stores.js'
+  import getApi from './data/data.js'
   import Tailwindcss from './Tailwindcss.svelte'
   import RegionGrid from './components/RegionGrid.svelte'
   import DateController from './components/DateController.svelte'
   import GlobalData from './components/GlobalData.svelte'
   import RegionFilter from './components/RegionFilter.svelte'
   import Data from './data/data.svelte'
-  import getApi from './data.js'
 
-  let promise = waitForApi
-
-  waitForApi = async () => {
+  const waitForApi = async () => {
     $data = await getApi()
     $dates = await Object.keys($data.confirmed)
     $dateMax = (await $dates.length) - 1
     $dateIdx = await $dateMax
     $allCountries = await Object.keys($data.countries)
+    console.log($data)
     return $data
   }
+
+  let promise = waitForApi()
 </script>
 
 <Tailwindcss />

@@ -1,9 +1,9 @@
 <script>
   import { last } from '../data/data.js'
-  import { dateIdx, data } from '../data/stores.js'
+  import { dateIdx, data, dates } from '../data/stores.js'
   import Slope from './Slope.svelte'
 
-  export let region
+  export let country
 
   const rnd2 = x => Math.round(x * 100) / 100
   const rnd0 = x => Math.round(x)
@@ -11,11 +11,11 @@
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   const redGreen = (x, y) => (x > y ? 'text-red-500' : 'text-green-500')
 
-  $: recent = last($data.countries[region].total.confirmed.slice(0, $dateIdx), 4)
-  $: today = recent[3]
-  $: yesterday = recent[2]
-  $: twoAgo = recent[1]
-  $: threeAgo = recent[0]
+  $: recent = last($dates.slice(0, $dateIdx), 4)
+  $: today = $data.countries[country].total.confirmed[recent[3]]
+  $: yesterday = $data.countries[country].total.confirmed[recent[2]]
+  $: twoAgo = $data.countries[country].total.confirmed[recent[1]]
+  $: threeAgo = $data.countries[country].total.confirmed[recent[0]]
 
   $: nowRate = today / yesterday
   $: prevRate = yesterday / twoAgo
@@ -57,8 +57,7 @@
 
 {#if nowRate > 0 && nowRate !== Infinity && prevRate !== Infinity}
   <div class="flex flex-col">
-    <h3>{region === 'US' ? 'United States (US)' : region}</h3>
-
+    <h3>{country}</h3>
     <div class="flex flex-row">
       <div class="chart-wrap">
         <div class="chart-div">

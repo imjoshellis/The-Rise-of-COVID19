@@ -12,9 +12,9 @@
 
   $: recent = last($dates.slice(0, $dateIdx), 4)
   $: today = $data.confirmed[recent[3]]
-  $: yesterday = recent[2]
-  $: twoAgo = recent[1]
-  $: threeAgo = recent[0]
+  $: yesterday = $data.confirmed[recent[2]]
+  $: twoAgo = $data.confirmed[recent[1]]
+  $: threeAgo = $data.confirmed[recent[0]]
 
   $: nowRate = today / yesterday
   $: prevRate = yesterday / twoAgo
@@ -110,8 +110,8 @@
     </div>
   </div>
   <div class="region-squares">
-    {#each allRegions as region}
-      <RegionSquare {region} />
+    {#each $allCountries as country}
+      <RegionSquare {country} />
     {/each}
   </div>
 </div>
