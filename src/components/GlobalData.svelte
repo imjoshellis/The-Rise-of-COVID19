@@ -1,7 +1,7 @@
 <script>
   import { last } from '../data/data.js'
   import RegionSquare from './RegionSquare.svelte'
-  import { dateIdx, data, allCountries } from '../data/stores.js'
+  import { dateIdx, dates, allCountries, data } from '../data/stores.js'
 
   const rnd5 = x => Math.round(x * 10000) / 10000
   const rnd2 = x => Math.round(x * 100) / 100
@@ -10,8 +10,8 @@
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   const redGreen = (x, y) => (x > y ? 'text-red-500' : 'text-green-500')
 
-  $: recent = last($data.confirmed.slice(0, $dateIdx), 4)
-  $: today = recent[3]
+  $: recent = last($dates.slice(0, $dateIdx), 4)
+  $: today = $data.confirmed[recent[3]]
   $: yesterday = recent[2]
   $: twoAgo = recent[1]
   $: threeAgo = recent[0]

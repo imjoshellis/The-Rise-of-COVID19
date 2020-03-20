@@ -60,7 +60,7 @@ const renameUS = () => {
   delete data.countries.US // Delete old key
 }
 
-export const getApi = async () => {
+const getApi = async () => {
   const response = await fetch(apiURL, {
     headers: {}
   })
@@ -71,6 +71,8 @@ export const getApi = async () => {
   await renameUS()
   return data
 }
+
+export default getApi
 
 export const last = function (array, n) {
   if (array == null) return void 0
