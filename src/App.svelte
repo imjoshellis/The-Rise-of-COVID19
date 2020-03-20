@@ -23,15 +23,17 @@
 
 <Tailwindcss />
 {#await promise}
-  <div class="w-full h-full flex flex row items-center justify-center">
+  <div class="w-screen h-screen flex flex row items-center justify-center">
     <Spinner size="48" speed="500" color="#404244" thickness="2" gap="40" />
     <div class="mr-16 text-2xl">Fetching data...</div>
   </div>
 {:then data}
-  <Header />
-  <div class="flex flex-row items-center justify-beween">
-    <div class="flex-grow">
-      <DateController />
+  <div class="sticky w-full bg-gray-900 z-50 pb-4" style="top:0;">
+    <Header />
+    <div class="flex flex-row items-center justify-beween">
+      <div class="flex-grow">
+        <DateController />
+      </div>
     </div>
   </div>
 
