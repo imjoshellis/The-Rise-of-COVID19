@@ -1,5 +1,5 @@
 <script>
-  import SubAreaView from './SubAreaView.svelte'
+  import SubArea from './SubArea.svelte'
   import { last, colorizeText } from '../../data/data.js'
   import { dateIdx, data, dates } from '../../data/stores.js'
 
@@ -23,8 +23,10 @@
   p.deltaRate = (p.nowRate / p.prevRate).toPrecision(3)
   p.prevDeltaRate = (p.prevRate / p.prevprevRate).toPrecision(3)
   p.color = colorizeText(p.nowRate, p.prevRate, p.today)
+
+  const valid = p.nowRate > 0 && p.nowRate !== Infinity && p.prevRate !== Infinity && p.yesterday > 0 && p.twoAgo > 0
 </script>
 
-{#if p.nowRate > 0 && p.nowRate !== Infinity && p.prevRate !== Infinity && p.yesterday > 0 && p.twoAgo > 0}
-  <SubAreaView {p} />
+{#if valid}
+  <SubArea {p} />
 {/if}
