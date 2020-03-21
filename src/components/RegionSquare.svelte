@@ -1,5 +1,5 @@
 <script>
-  import { last } from '../data/data.js'
+  import { last, colorizeBg } from '../data/data.js'
   import { dateIdx, data, dates } from '../data/stores.js'
 
   export let country
@@ -14,27 +14,7 @@
   $: nowRate = (today / yesterday).toPrecision(3)
   $: prevRate = (yesterday / twoAgo).toPrecision(3)
 
-  const colorize = (x, y) => {
-    if (today > 0) {
-      if (x > 1) {
-        if (x > y) {
-          return 'border-red-600 bg-red-700'
-        } else {
-          return 'border-orange-500 bg-orange-600'
-        }
-      } else {
-        if (x > y) {
-          return 'border-yellow-500 bg-yellow-600'
-        } else {
-          return 'border-green-500 bg-green-600'
-        }
-      }
-    } else {
-      return 'border-gray-800 bg-gray-900'
-    }
-  }
-
-  $: color = colorize(nowRate, prevRate)
+  $: color = colorizeBg(nowRate, prevRate, today)
 </script>
 
 <style type="text/scss">
