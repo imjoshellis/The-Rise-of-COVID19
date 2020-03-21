@@ -32,7 +32,7 @@
 </style>
 
 <div class="flex flex-col">
-  <h3>{p.country}</h3>
+  <h3>{p.header}</h3>
   <div class="flex flex-row">
     <div class="chart-wrap">
       <div class="chart-div">

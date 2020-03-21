@@ -7,7 +7,7 @@
 
   export let country
 
-  p.country = country
+  p.header = country
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
 
   const recent = last($dates.slice(0, $dateIdx), 4)
