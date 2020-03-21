@@ -1,10 +1,9 @@
 <script>
   import { last } from '../data/data.js'
 
-  export let color
-  export let nowRate
+  export let p
 
-  $: yValue = nowRate * 50
+  $: yValue = p.nowRate * 50
   $: yUp = (0 - 1) * yValue + 50 + ''
   $: yDown = yValue + 50 + ''
 </script>
@@ -16,7 +15,7 @@
   }
 </style>
 
-<div class={color}>
+<div class={p.color}>
   <svg
     class="stroke-current"
     version="1.1"
