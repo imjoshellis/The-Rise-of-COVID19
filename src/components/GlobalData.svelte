@@ -11,10 +11,10 @@
   const redGreen = (x, y) => (x > y ? 'text-red-500' : 'text-green-500')
 
   $: recent = last($dates.slice(0, $dateIdx), 4)
-  $: today = $data.confirmed[recent[3]]
-  $: yesterday = $data.confirmed[recent[2]]
-  $: twoAgo = $data.confirmed[recent[1]]
-  $: threeAgo = $data.confirmed[recent[0]]
+  $: today = $data.active[recent[3]]
+  $: yesterday = $data.active[recent[2]]
+  $: twoAgo = $data.active[recent[1]]
+  $: threeAgo = $data.active[recent[0]]
 
   $: nowRate = today / yesterday
   $: prevRate = yesterday / twoAgo
@@ -90,7 +90,7 @@
       <h3>Global</h3>
       <div class="grid-cols-3 grid">
         <div class="data-div">
-          <h4>Confirmed Cases</h4>
+          <h4>Active Cases</h4>
           <div class="data-text ">Today: {today}</div>
           <div class="data-subtext">Yesterday: {yesterday}</div>
           <div class="data-subtext">Two Days Ago: {twoAgo}</div>

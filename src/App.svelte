@@ -11,7 +11,7 @@
 
   const waitForApi = async () => {
     $data = await getApi()
-    $dates = await Object.keys($data.confirmed)
+    $dates = await Object.keys($data.active)
     $dateMax = (await $dates.length) - 1
     $dateIdx = await $dateMax
     $allCountries = await Object.keys($data.countries).sort()

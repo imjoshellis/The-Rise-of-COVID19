@@ -7,9 +7,9 @@
   let display = true
 
   $: recent = last($dates.slice(0, $dateIdx), 4)
-  $: today = $data.countries[country].total.confirmed[recent[3]]
-  $: yesterday = $data.countries[country].total.confirmed[recent[2]]
-  $: twoAgo = $data.countries[country].total.confirmed[recent[1]]
+  $: today = $data.countries[country].total.active[recent[3]]
+  $: yesterday = $data.countries[country].total.active[recent[2]]
+  $: twoAgo = $data.countries[country].total.active[recent[1]]
 
   $: nowRate = (today / yesterday).toPrecision(3)
   $: prevRate = (yesterday / twoAgo).toPrecision(3)

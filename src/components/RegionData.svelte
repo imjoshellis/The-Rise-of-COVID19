@@ -26,10 +26,10 @@
   }
 
   $: recent = last($dates.slice(0, $dateIdx), 4)
-  $: today = $data.countries[country].total.confirmed[recent[3]]
-  $: yesterday = $data.countries[country].total.confirmed[recent[2]]
-  $: twoAgo = $data.countries[country].total.confirmed[recent[1]]
-  $: threeAgo = $data.countries[country].total.confirmed[recent[0]]
+  $: today = $data.countries[country].total.active[recent[3]]
+  $: yesterday = $data.countries[country].total.active[recent[2]]
+  $: twoAgo = $data.countries[country].total.active[recent[1]]
+  $: threeAgo = $data.countries[country].total.active[recent[0]]
 
   $: nowRate = (today / yesterday).toPrecision(3)
   $: prevRate = (yesterday / twoAgo).toPrecision(3)
@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="data-div">
-        <h4>Confirmed Cases</h4>
+        <h4>Active Cases</h4>
         <div class="data-text ">Today: {today}</div>
         <div class="data-subtext">Yesterday: {yesterday}</div>
         <div class="data-subtext">Two Days Ago: {twoAgo}</div>
