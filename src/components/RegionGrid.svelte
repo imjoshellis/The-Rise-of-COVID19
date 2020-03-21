@@ -5,6 +5,6 @@
 
 <div class="grid lg:grid-cols-3 gap-4">
   {#each $countries as country}
-    <SubAreaContainer {country} />
+    <SubAreaContainer subArea={country} />
   {/each}
 </div>
