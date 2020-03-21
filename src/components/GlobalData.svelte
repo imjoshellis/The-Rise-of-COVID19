@@ -1,5 +1,5 @@
 <script>
-  import { last } from '../data/data.js'
+  import { last, colorizeText } from '../data/data.js'
   import RegionSquare from './RegionSquare.svelte'
   import { dateIdx, dates, allCountries, data } from '../data/stores.js'
 
@@ -8,7 +8,6 @@
   const rnd0 = x => Math.round(x)
 
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
-  const redGreen = (x, y) => (x > y ? 'text-red-500' : 'text-green-500')
 
   $: recent = last($dates.slice(0, $dateIdx), 4)
   $: today = $data.active[recent[3]]
@@ -28,7 +27,7 @@
   $: yValue = nowRate * 50
   $: yUp = (0 - 1) * yValue + 50 + ''
   $: yDown = yValue + 50 + ''
-  $: color = deltaRate > 1 ? 'text-red-500' : 'text-green-500'
+  $: color = colorizeText(nowRate, prevRate, today)
 </script>
 
 <style type="text/scss">
@@ -97,7 +96,7 @@
         </div>
         <div class="data-div">
           <h4>Rate of Growth</h4>
-          <div class="data-text {redGreen(nowRate, prevRate)}">{arrow(nowRate, prevRate)} Today: {rnd5(nowRate)}</div>
+          <div class="data-text {color}">{arrow(nowRate, prevRate)} Today: {rnd5(nowRate)}</div>
           <div class="data-subtext">{arrow(prevRate, prevprevRate)} Yesterday: {rnd5(prevRate)}</div>
           <div class="data-subtext">{arrow(deltaRate, prevDeltaRate)} Rate of Rate: {rnd5(deltaRate)}</div>
         </div>
