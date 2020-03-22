@@ -6,15 +6,8 @@
 </script>
 
 <script>
-  let p = {}
-
   export let subArea
-  p.header = subArea.name
-
-  p.today = subArea.today
-  p.yesterday = subArea.yesterday
-  p.twoAgo = subArea.twoAgo
-  p.threeAgo = subArea.threeAgo
+  let p = { ...subArea }
 
   p.nowRate = (p.today / p.yesterday).toPrecision(3)
   p.prevRate = (p.yesterday / p.twoAgo).toPrecision(3)

@@ -1,5 +1,5 @@
 <script>
-  import Square from './Square.svelte'
+  import SquareContainer from './SquareContainer.svelte'
   import { subAreas } from '../../../data/stores.js'
 </script>
 
@@ -11,6 +11,6 @@
 
 <div class="region-squares">
   {#each $subAreas as subArea}
-    <Square {subArea} />
+    <SquareContainer {subArea} />
   {/each}
 </div>
