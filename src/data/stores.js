@@ -57,5 +57,6 @@ export const subAreas = derived([data, area, dateValue], ([$data, $area, $dateVa
       subAreas = [...subAreas, subArea]
     }
   }
+  console.log(subAreas[0].today)
   return subAreas
 })
