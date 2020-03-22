@@ -1,5 +1,9 @@
 module.exports = {
   theme: {
+    fontWeight: {
+      normal: 300,
+      bold: 600
+    },
     extend: {
       colors: {
         gray: {
