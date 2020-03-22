@@ -80,12 +80,20 @@ export const subAreas = derived([data, areaType, dateValue], ([$data, $areaType,
         .subtract(3, 'days')
         .format()
       const threeActive = $data.countries[country].total.active[threeAgo]
+      let hasSubAreas = false
+      let style = ''
+      if (Object.keys($data.countries[country]).length > 1) {
+        hasSubAreas = true
+        style = 'underline cursor-pointer hover:text-gray-400 transition-all duration-300 ease-out'
+      }
       const subArea = {
         name: country,
         today: todayActive,
         yesterday: yesterdayActive,
         twoAgo: twoActive,
-        threeAgo: threeActive
+        threeAgo: threeActive,
+        hasSubAreas: hasSubAreas,
+        style: style
       }
       subAreas = [...subAreas, subArea]
     }

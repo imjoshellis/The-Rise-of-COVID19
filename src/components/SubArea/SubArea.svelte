@@ -32,7 +32,7 @@
 </style>
 
 <div class="flex flex-col">
-  <h3>{p.name}</h3>
+  <h3 class="{p.style} {p.color}">{p.name}</h3>
   <div class="flex flex-row">
     <div class="chart-wrap">
       <div class="chart-div">
