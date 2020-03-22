@@ -37,7 +37,5 @@
     </div>
   </div>
 
-  <div class="px-16">
-    <AreaContainer />
-  </div>
+  <AreaContainer />
 {/await}
