@@ -33,18 +33,18 @@ export const subAreas = derived([data, area, dateValue], ([$data, $area, $dateVa
         .format()
       const todayActive = $data.countries[country].total.active[today]
       const yesterday = moment($dateValue)
-        .subtract(1, 'days')
         .utc()
+        .subtract(1, 'days')
         .format()
       const yesterdayActive = $data.countries[country].total.active[yesterday]
       const twoAgo = moment($dateValue)
-        .subtract(2, 'days')
         .utc()
+        .subtract(2, 'days')
         .format()
       const twoActive = $data.countries[country].total.active[twoAgo]
       const threeAgo = moment($dateValue)
-        .subtract(3, 'days')
         .utc()
+        .subtract(3, 'days')
         .format()
       const threeActive = $data.countries[country].total.active[threeAgo]
       const subArea = {
@@ -57,6 +57,5 @@ export const subAreas = derived([data, area, dateValue], ([$data, $area, $dateVa
       subAreas = [...subAreas, subArea]
     }
   }
-  console.log(subAreas[0].today)
-  return subAreas
+  return subAreas.sort((a, b) => (a.name > b.name ? 1 : -1))
 })
