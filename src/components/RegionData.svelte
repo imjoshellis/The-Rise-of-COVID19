@@ -8,10 +8,6 @@
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
 
   $: recent = last($dates.slice(0, $dateIdx), 4)
-  $: today = $data.countries[country].total.active[recent[3]]
-  $: yesterday = $data.countries[country].total.active[recent[2]]
-  $: twoAgo = $data.countries[country].total.active[recent[1]]
-  $: threeAgo = $data.countries[country].total.active[recent[0]]
 
   $: nowRate = (today / yesterday).toPrecision(3)
   $: prevRate = (yesterday / twoAgo).toPrecision(3)

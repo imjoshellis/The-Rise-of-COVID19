@@ -1,10 +1,10 @@
 <script>
   import { data, dates, dateMax, dateIdx, allCountries } from './data/stores.js'
+  import AreaContainer from './components/Area/AreaContainer.svelte'
   import getApi from './data/data.js'
   import Tailwindcss from './Tailwindcss.svelte'
   import RegionGrid from './components/RegionGrid.svelte'
   import DateController from './components/DateController.svelte'
-  import GlobalData from './components/GlobalData.svelte'
   import RegionFilter from './components/RegionFilter.svelte'
   import Spinner from 'svelte-spinner'
   import Header from './components/Header.svelte'
@@ -37,10 +37,5 @@
     </div>
   </div>
 
-  <div class="px-16">
-    <div class="my-8">
-      <GlobalData />
-    </div>
-    <RegionGrid />
-  </div>
+  <AreaContainer />
 {/await}

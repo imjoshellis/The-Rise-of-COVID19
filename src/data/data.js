@@ -17,6 +17,7 @@ export const colorizeText = (x, y, today) => {
     return 'text-gray-500'
   }
 }
+
 export const colorizeBg = (x, y, today) => {
   if (today > 0) {
     if (x > 1) {
