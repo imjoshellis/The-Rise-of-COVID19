@@ -25,7 +25,7 @@ export const dateIdx = writable(0)
 export const dateValue = derived([dates, dateIdx], ([$dates, $dateIdx]) => new Date($dates[$dateIdx]))
 
 export const subAreas = derived([data, area, dateValue], ([$data, $area, $dateValue]) => {
-  const subAreas = []
+  let subAreas = []
   if ($area === 'global') {
     for (const country in $data.countries) {
       const today = moment($dateValue)
@@ -54,7 +54,7 @@ export const subAreas = derived([data, area, dateValue], ([$data, $area, $dateVa
         twoAgo: twoActive,
         threeAgo: threeActive
       }
-      subAreas.push(subArea)
+      subAreas = [...subAreas, subArea]
     }
   }
   return subAreas
