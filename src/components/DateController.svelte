@@ -24,7 +24,6 @@
     if (playing) {
       interval = setInterval(() => {
         if ($dateIdx != $dateMax) {
-          console.log('tick')
           $dateIdx++
         } else {
           clearInterval(interval)
