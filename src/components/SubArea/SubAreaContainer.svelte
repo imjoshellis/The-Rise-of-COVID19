@@ -12,7 +12,7 @@
   p.header = subArea.name
 
   p.today = subArea.today
-  p.yesterday = subArea.yetserday
+  p.yesterday = subArea.yesterday
   p.twoAgo = subArea.twoAgo
   p.threeAgo = subArea.threeAgo
 
