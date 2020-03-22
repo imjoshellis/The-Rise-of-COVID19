@@ -13,6 +13,8 @@
   }
 </script>
 
-<Area />
+<div class="my-8">
+  <Area />
+</div>
 <SquareGrid />
 <SubAreaGrid {subAreas} />
