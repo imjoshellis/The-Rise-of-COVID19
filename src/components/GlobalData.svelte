@@ -61,10 +61,6 @@
     display: inline-block;
     width: 100%;
   }
-
-  .region-squares {
-    @apply flex flex-col flex-wrap h-16 items-center justify-start content-center;
-  }
 </style>
 
 <div class="flex flex-col">
