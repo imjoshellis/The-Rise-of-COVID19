@@ -2,7 +2,7 @@
   import Area from './Area.svelte'
   import SubAreaGrid from '../SubArea/SubAreaGrid.svelte'
   import SquareGrid from './Square/SquareGrid.svelte'
-  import { area } from '../../data/stores.js'
+  import { area, areaType } from '../../data/stores.js'
   import { colorizeText } from '../../data/data.js'
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   let p
@@ -19,13 +19,18 @@
   $: p.prevDeltaRate = (p.prevRate / p.prevprevRate).toPrecision(3)
 
   $: p.color = colorizeText(p.nowRate, p.prevRate, p.today)
+  $: p.back = p.name === 'Global' ? '' : '‹ '
+
+  const back = () => {
+    $areaType = 'Global'
+  }
 
   $: valid = p.nowRate > 0 && p.nowRate !== Infinity && p.prevRate !== Infinity && p.yesterday > 0 && p.twoAgo > 0
 </script>
 
 <div class="px-16">
   <div class="my-8">
-    <Area {p} />
+    <Area {p} {back} />
   </div>
   <SquareGrid />
   <SubAreaGrid />

@@ -1,6 +1,7 @@
 <script context="module">
   import SubArea from './SubArea.svelte'
   import { colorizeText } from '../../data/data.js'
+  import { area, areaType } from '../../data/stores.js'
 
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
 </script>
@@ -23,8 +24,12 @@
   $: p.color = colorizeText(p.nowRate, p.prevRate, p.today)
 
   $: valid = p.nowRate > 0 && p.nowRate !== Infinity && p.prevRate !== Infinity && p.yesterday > 0 && p.twoAgo > 0
+
+  const setArea = () => {
+    $areaType = subArea.name
+  }
 </script>
 
 {#if valid}
-  <SubArea {p} />
+  <SubArea {p} {setArea} />
 {/if}

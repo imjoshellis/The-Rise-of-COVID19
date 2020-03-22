@@ -1,11 +1,12 @@
 <script>
   import Slope from '../Slope.svelte'
   export let p
+  export let back
 </script>
 
 <style type="text/scss">
   h3 {
-    @apply text-4xl font-bold;
+    @apply text-4xl font-bold text-gray-400;
   }
 
   .chart-wrap {
@@ -36,7 +37,7 @@
 </style>
 
 <div class="flex flex-col">
-  <h3>{p.name}</h3>
+  <h3 on:click={back} class={p.style}>{p.back}{p.name}</h3>
   <div class="flex flex-row">
     <div class="chart-wrap">
       <div class="chart-div">

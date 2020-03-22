@@ -1,6 +1,7 @@
 <script>
   import Slope from '../Slope.svelte'
   export let p
+  export let setArea
 </script>
 
 <style type="text/scss">
@@ -32,7 +33,7 @@
 </style>
 
 <div class="flex flex-col">
-  <h3 class="{p.style} {p.color}">{p.name}</h3>
+  <h3 on:click={setArea} class="{p.style} text-gray-500">{p.name}</h3>
   <div class="flex flex-row">
     <div class="chart-wrap">
       <div class="chart-div">
