@@ -1,13 +1,10 @@
 <script>
   import { data, dates, dateMax, dateIdx, allCountries } from './data/stores.js'
-  import AreaContainer from './components/Area/AreaContainer.svelte'
   import getApi from './data/data.js'
   import Tailwindcss from './Tailwindcss.svelte'
-  import RegionGrid from './components/RegionGrid.svelte'
-  import DateController from './components/DateController.svelte'
-  import RegionFilter from './components/RegionFilter.svelte'
   import Spinner from 'svelte-spinner'
-  import Header from './components/Header.svelte'
+  import Header from './components/Header/Header.svelte'
+  import AreaContainer from './components/Area/AreaContainer.svelte'
 
   const waitForApi = async () => {
     $data = await getApi()
@@ -28,14 +25,6 @@
     <div class="mr-16 text-2xl">Fetching data...</div>
   </div>
 {:then data}
-  <div class="sticky w-full bg-gray-900 z-50 pb-4" style="top:0;">
-    <Header />
-    <div class="flex flex-row items-center justify-beween">
-      <div class="flex-grow">
-        <DateController />
-      </div>
-    </div>
-  </div>
-
+  <Header />
   <AreaContainer />
 {/await}
