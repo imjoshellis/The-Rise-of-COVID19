@@ -1,7 +1,7 @@
 <script>
   import Square from './Square.svelte'
   import { colorizeBg } from '../../../data/data.js'
-  import { pinnedAreas } from '../../../data/stores.js'
+  import { pinnedAreasList } from '../../../data/stores.js'
   export let subArea
   let p
   let pinColor = ''
@@ -13,19 +13,18 @@
   $: p.color = colorizeBg(p.nowRate, p.prevRate, p.today)
 
   const pinArea = () => {
-    let arr = $pinnedAreas.filter(pinnedArea => {
-      return pinnedArea.name === p.name
+    let arr = $pinnedAreasList.filter(pinnedAreaName => {
+      return pinnedAreaName === p.name
     })
-    console.log(arr, p.name, $pinnedAreas)
+    console.log(arr, p.name, $pinnedAreasList)
     if (arr.length > 0) {
-      $pinnedAreas = $pinnedAreas.filter(pinnedArea => {
-        return pinnedArea.name !== p.name
+      $pinnedAreasList = $pinnedAreasList.filter(pinnedAreaName => {
+        return pinnedAreaName !== p.name
       })
       pinColor = ''
     } else {
-      p.pinned = true
       pinColor = 'bg-gray-100 w-full h-full opacity-75'
-      $pinnedAreas = [p, ...$pinnedAreas]
+      $pinnedAreasList = [p.name, ...$pinnedAreasList]
     }
   }
 </script>

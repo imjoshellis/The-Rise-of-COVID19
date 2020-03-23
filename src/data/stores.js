@@ -87,8 +87,6 @@ export const area = derived([data, areaType, dateValue], ([$data, $areaType, $da
   return area
 })
 
-export const pinnedAreas = writable([])
-
 export const subAreas = derived(
   [data, areaType, dateValue, countryStr],
   ([$data, $areaType, $dateValue, $countryStr]) => {
@@ -171,4 +169,9 @@ export const subAreas = derived(
     var re = new RegExp($countryStr, 'gi')
     return subAreas.filter(subArea => subArea.name.match(re)).sort((a, b) => (a.name > b.name ? 1 : -1))
   }
+)
+
+export const pinnedAreasList = writable([])
+export const pinnedAreas = derived([subAreas, pinnedAreasList], ([$subAreas, $pinnedAreasList]) =>
+  $subAreas.filter(o => $pinnedAreasList.includes(o.name))
 )
