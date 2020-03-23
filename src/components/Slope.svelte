@@ -6,6 +6,8 @@
   $: yValue = p.nowRate * 50
   $: yUp = (0 - 1) * yValue + 50 + ''
   $: yDown = yValue + 50 + ''
+
+  let theta = 90
 </script>
 
 <style type="text/scss">
@@ -23,7 +25,6 @@
     preserveAspectRatio="xMidYMid meet"
     xmlns="http://www.w3.org/2000/svg">
     <line x1="0" x2="100" y1="100" y2="0" stroke-width="1" class="text-gray-500" />
-    <line x1="50" x2="100" y1="50" y2={yUp} stroke-width="2" />
-    <line x1="50" x2="0" y1="50" y2={yDown} stroke-width="2" />
+    <line x1="0" x2="100" y1="100" y2="0" style="transform: rotate({theta}deg)" stroke-width="2" />
   </svg>
 </div>
