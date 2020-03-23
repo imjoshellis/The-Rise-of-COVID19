@@ -13,6 +13,7 @@
 
   .chart-wrap {
     flex-basis: 30%;
+    max-width: 24rem;
   }
   .chart-div {
     overflow: hidden;
@@ -130,15 +131,19 @@
         <Slope {p} />
       </div>
     </div>
-    <div class="data-div">
-      <h4>Active Cases</h4>
-      <div class="data-text ">Today: {p.today}</div>
-      <div class="data-subtext">Yesterday: {p.yesterday}</div>
-      <div class="data-subtext">Two Days Ago: {p.twoAgo}</div>
-      <h4>Rate of Growth</h4>
-      <div class="data-text {p.color}">{p.nowRateArrow} Today: {p.nowRate}</div>
-      <div class="data-subtext">{p.prevRateArrow} Yesterday: {p.prevRate}</div>
-      <div class="data-subtext">Rate of Rate: {p.deltaRate}</div>
+    <div class="flex flex-col">
+      <div class="data-div mr-2">
+        <h4>Active Cases</h4>
+        <div class="data-text ">Today: {p.today}</div>
+        <div class="data-subtext">Yesterday: {p.yesterday}</div>
+        <div class="data-subtext">Two Days Ago: {p.twoAgo}</div>
+      </div>
+      <div class="data-div">
+        <h4>Rate of Growth</h4>
+        <div class="data-text {p.color}">{p.nowRateArrow} Today: {p.nowRate}</div>
+        <div class="data-subtext">{p.prevRateArrow} Yesterday: {p.prevRate}</div>
+        <div class="data-subtext">Rate of Rate: {p.deltaRate}</div>
+      </div>
     </div>
   </div>
 
