@@ -28,7 +28,6 @@
   const setArea = () => {
     $areaType = subArea.name
     $pinnedAreasList = []
-    console.log($pinnedAreasList)
   }
 </script>
 
