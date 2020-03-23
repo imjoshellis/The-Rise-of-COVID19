@@ -12,11 +12,12 @@
 
   $: p.color = colorizeBg(p.nowRate, p.prevRate, p.today)
 
+  $: pinColor = pinnedAreasList.length > 0 ? '' : pinColor
+
   const pinArea = () => {
     let arr = $pinnedAreasList.filter(pinnedAreaName => {
       return pinnedAreaName === p.name
     })
-    console.log(arr, p.name, $pinnedAreasList)
     if (arr.length > 0) {
       $pinnedAreasList = $pinnedAreasList.filter(pinnedAreaName => {
         return pinnedAreaName !== p.name
