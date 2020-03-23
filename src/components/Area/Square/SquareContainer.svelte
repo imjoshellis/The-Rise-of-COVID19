@@ -13,9 +13,20 @@
   $: p.color = colorizeBg(p.nowRate, p.prevRate, p.today)
 
   const pinArea = () => {
-    p.pinned = true
-    pinColor = 'bg-gray-100 w-full h-full opacity-75'
-    $pinnedAreas = [p, ...$pinnedAreas]
+    let arr = $pinnedAreas.filter(pinnedArea => {
+      return pinnedArea.name === p.name
+    })
+    console.log(arr, p.name, $pinnedAreas)
+    if (arr.length > 0) {
+      $pinnedAreas = $pinnedAreas.filter(pinnedArea => {
+        return pinnedArea.name !== p.name
+      })
+      pinColor = ''
+    } else {
+      p.pinned = true
+      pinColor = 'bg-gray-100 w-full h-full opacity-75'
+      $pinnedAreas = [p, ...$pinnedAreas]
+    }
   }
 </script>
 
