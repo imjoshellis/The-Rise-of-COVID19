@@ -1,9 +1,10 @@
 <script>
-  import { dateIdx, dateMax, filterStr, pinnedAreasList } from '../../data/stores.js'
+  import { areaType, dateIdx, dateMax, filterStr, pinnedAreasList } from '../../data/stores.js'
   const reset = () => {
     $dateIdx = $dateMax
     $filterStr = ''
     $pinnedAreasList = []
+    $areaType = 'Global'
   }
   export let toggleAbout
 </script>
