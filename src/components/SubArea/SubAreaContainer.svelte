@@ -2,7 +2,7 @@
   import SubArea from './SubArea.svelte'
   import { beforeUpdate } from 'svelte'
   import { colorizeText } from '../../data/data.js'
-  import { area, areaType, pinnedAreasList } from '../../data/stores.js'
+  import { area, areaType, pinnedAreasList, filterStr } from '../../data/stores.js'
 
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
 </script>
@@ -42,6 +42,7 @@
   const setArea = () => {
     $areaType = subArea.name
     $pinnedAreasList = []
+    $filterStr = ''
   }
 
   const togglePin = () => {
