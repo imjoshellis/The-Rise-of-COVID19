@@ -1,4 +1,4 @@
-<div class="flex flex-row my-2 sm:my-0 ml-1 sm:ml-0">
+<div class="flex flex-row my-2 sm:my-0 ml-1">
   <a href="https://ko-fi.com/T6T31IWGF" target="_blank">
     <button
       class="text-sm rounded bg-gray-700 transition-all duration-300 ease-out hover:bg-gray-500 px-4 py-2
