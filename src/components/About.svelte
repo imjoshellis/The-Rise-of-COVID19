@@ -2,7 +2,7 @@
   export let toggleAbout
 </script>
 
-<style type="text/scss">
+<style type="text/postcss">
   button {
     cursor: pointer;
   }
