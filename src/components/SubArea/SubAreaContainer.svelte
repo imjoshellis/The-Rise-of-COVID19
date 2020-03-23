@@ -1,5 +1,6 @@
 <script context="module">
   import SubArea from './SubArea.svelte'
+  import { beforeUpdate } from 'svelte'
   import { colorizeText } from '../../data/data.js'
   import { area, areaType, pinnedAreasList } from '../../data/stores.js'
 
@@ -25,12 +26,38 @@
 
   $: valid = p.nowRate > 0 && p.nowRate !== Infinity && p.prevRate !== Infinity && p.yesterday > 0 && p.twoAgo > 0
 
+  let pinned = false
+
+  beforeUpdate(() => {
+    let arr = $pinnedAreasList.filter(pinnedAreaName => {
+      return pinnedAreaName === p.name
+    })
+    if (arr.length > 0) {
+      pinned = true
+    } else {
+      pinned = false
+    }
+  })
+
   const setArea = () => {
     $areaType = subArea.name
     $pinnedAreasList = []
   }
+
+  const togglePin = () => {
+    let arr = $pinnedAreasList.filter(pinnedAreaName => {
+      return pinnedAreaName === p.name
+    })
+    if (arr.length > 0) {
+      $pinnedAreasList = $pinnedAreasList.filter(pinnedAreaName => {
+        return pinnedAreaName !== p.name
+      })
+    } else {
+      $pinnedAreasList = [p.name, ...$pinnedAreasList]
+    }
+  }
 </script>
 
 {#if valid}
-  <SubArea {p} {setArea} />
+  <SubArea {p} {pinned} {togglePin} {setArea} />
 {/if}
