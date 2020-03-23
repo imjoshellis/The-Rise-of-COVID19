@@ -1,8 +1,8 @@
 <div class="flex flex-row my-2 sm:my-0 ml-1">
   <a href="https://ko-fi.com/T6T31IWGF" target="_blank">
     <button
-      class="text-sm rounded bg-gray-700 transition-all duration-300 ease-out hover:bg-gray-500 px-4 py-2
-      whitespace-no-wrap flex flex-row items-center justify-center">
+      class="text-sm rounded text-gray-500 hover:text-gray-300 bg-gray-800 transition-all duration-300 ease-out
+      hover:bg-gray-600 px-4 py-2 whitespace-no-wrap flex flex-row items-center justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
