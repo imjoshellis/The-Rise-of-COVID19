@@ -163,15 +163,24 @@ export const subAreas = derived(
       }
     }
 
-    if ($filterStr === '') {
-      return subAreas.sort((a, b) => (a.name > b.name ? 1 : -1))
-    }
-    var re = new RegExp($filterStr, 'gi')
-    return subAreas.filter(subArea => subArea.name.match(re)).sort((a, b) => (a.name > b.name ? 1 : -1))
+    return subAreas.sort((a, b) => (a.name > b.name ? 1 : -1))
   }
 )
 
 export const pinnedAreasList = writable([])
 export const pinnedAreas = derived([subAreas, pinnedAreasList], ([$subAreas, $pinnedAreasList]) =>
   $subAreas.filter(o => $pinnedAreasList.includes(o.name))
+)
+
+export const subAreasFiltered = derived(
+  [subAreas, pinnedAreasList, filterStr],
+  ([$subAreas, $pinnedAreasList, $filterStr]) => {
+    const removePinned = $subAreas.filter(o => !$pinnedAreasList.includes(o.name))
+
+    if ($filterStr === '') {
+      return removePinned
+    }
+    var re = new RegExp($filterStr, 'gi')
+    return removePinned.filter(subArea => subArea.name.match(re)).sort((a, b) => (a.name > b.name ? 1 : -1))
+  }
 )
