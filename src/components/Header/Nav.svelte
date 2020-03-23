@@ -1,8 +1,10 @@
 <script>
-  import { dateIdx, dateMax, countryStr } from '../data/stores.js'
+  import { areaType, dateIdx, dateMax, filterStr, pinnedAreasList } from '../../data/stores.js'
   const reset = () => {
     $dateIdx = $dateMax
-    $countryStr = ''
+    $filterStr = ''
+    $pinnedAreasList = []
+    $areaType = 'Global'
   }
   export let toggleAbout
 </script>
@@ -22,7 +24,7 @@
 </style>
 
 <nav>
-  <div class="flex flex-row">
+  <div class="flex flex-row my-2 sm:my-0">
     <button on:click={reset}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +41,7 @@
         <polyline points="1 20 1 14 7 14" />
         <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
       </svg>
-      <span>Reset</span>
+      <span class="hidden sm:inline-block">Reset</span>
     </button>
     <button on:click={toggleAbout}>
       <svg
@@ -57,7 +59,7 @@
         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
         <line x1="12" y1="17" x2="12.01" y2="17" />
       </svg>
-      <span>About</span>
+      <span class="hidden sm:inline-block">About</span>
     </button>
     <a href="https://github.com/imjoshellis/covid-curves" target="_blank">
       <button>
@@ -77,7 +79,7 @@
             4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5
             4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
         </svg>
-        <span>Contribute on GitHub</span>
+        <span class="hidden sm:inline-block">Contribute on GitHub</span>
       </button>
     </a>
   </div>

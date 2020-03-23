@@ -1,5 +1,5 @@
 <script>
-  import { countryStr } from '../data/stores.js'
+  import { filterStr } from '../../data/stores.js'
   import { onMount } from 'svelte'
 
   onMount(() => {
@@ -21,11 +21,11 @@
   }
 </style>
 
-<div class="flex flex-row justify-center w-full mx-4">
+<div class="flex flex-row justify-center w-full mb-2 sm:mb-0 mx-4">
   <div class="flex flex-row py-2 pl-2 items-center justify-center text-gray-300">
     <label for="country">
       <i data-feather="search" style="height:1.25rem;width:1.25rem;" />
     </label>
   </div>
-  <input placeholder="Filter Countries by Name" type="text" name="country" id="country" bind:value={$countryStr} />
+  <input placeholder="Filter by Name" type="text" name="country" id="country" bind:value={$filterStr} />
 </div>

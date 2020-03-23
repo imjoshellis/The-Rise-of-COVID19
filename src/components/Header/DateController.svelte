@@ -1,5 +1,5 @@
 <script>
-  import { dates, dateValue, dateIdx, dateMax } from '../data/stores.js'
+  import { dates, dateValue, dateIdx, dateMax } from '../../data/stores.js'
   import noUiSlider from 'nouislider'
   import { onMount } from 'svelte'
 
@@ -24,7 +24,6 @@
     if (playing) {
       interval = setInterval(() => {
         if ($dateIdx != $dateMax) {
-          console.log('tick')
           $dateIdx++
         } else {
           clearInterval(interval)
