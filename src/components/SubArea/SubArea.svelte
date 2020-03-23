@@ -37,7 +37,13 @@
     @apply h-4 w-4;
   }
 
+  button {
+    @apply px-2 w-8 h-8 rounded mr-2;
+  }
+
   .unlock {
+    @apply bg-purple-900 text-purple-300;
+
     .feather-lock {
       display: block;
     }
@@ -45,6 +51,8 @@
       display: none;
     }
     &:hover {
+      @apply text-purple-100 bg-purple-500;
+
       .feather-lock {
         display: none;
       }
@@ -55,13 +63,18 @@
   }
 
   .lock {
+    @apply bg-purple-400 text-purple-900;
+
     .feather-lock {
       display: none;
     }
     .feather-unlock {
       display: block;
     }
+
     &:hover {
+      @apply bg-purple-700 text-purple-400;
+
       .feather-lock {
         display: block;
       }
@@ -75,9 +88,7 @@
 <div class="flex flex-col">
   <div class="flex flex-row justify-start items-center">
     {#if pinned}
-      <button
-        on:click={togglePin}
-        class="unlock bg-purple-900 hover:bg-purple-500 text-purple-300 hover:text-purple-100 px-2 w-8 h-8 rounded mr-2">
+      <button on:click={togglePin} class="unlock">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -104,9 +115,7 @@
         </svg>
       </button>
     {:else}
-      <button
-        on:click={togglePin}
-        class="lock bg-purple-400 hover:bg-purple-700 text-purple-900 hover:text-purple-400 px-2 w-8 h-8 rounded mr-2">
+      <button on:click={togglePin} class="lock">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
