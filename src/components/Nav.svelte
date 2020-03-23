@@ -1,8 +1,9 @@
 <script>
-  import { dateIdx, dateMax, countryStr } from '../data/stores.js'
+  import { dateIdx, dateMax, filterStr, pinnedAreasList } from '../data/stores.js'
   const reset = () => {
     $dateIdx = $dateMax
-    $countryStr = ''
+    $filterStr = ''
+    $pinnedAreasList = []
   }
   export let toggleAbout
 </script>
