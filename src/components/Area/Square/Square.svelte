@@ -1,5 +1,7 @@
 <script>
   export let p
+  export let pinArea
+  export let pinColor
 </script>
 
 <style type="text/scss">
@@ -35,6 +37,7 @@
   }
 </style>
 
-<div class="region-square tooltip text-xs {p.color}">
+<div on:click={pinArea} class="region-square tooltip text-xs cursor-pointer {p.color}">
+  <div class="pin-highlight {pinColor}" />
   <span class="tooltiptext">{p.name}</span>
 </div>

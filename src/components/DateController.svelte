@@ -62,7 +62,7 @@
   })
 </script>
 
-<style type="text/postcss">
+<style type="text/scss">
   button {
     @apply rounded px-2 py-1 mx-1 border-none transition-all duration-200 ease-out;
   }

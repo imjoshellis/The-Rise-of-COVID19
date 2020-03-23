@@ -1,13 +1,14 @@
 <script>
-  import { dateIdx, dateMax, countryStr } from '../data/stores.js'
+  import { dateIdx, dateMax, filterStr, pinnedAreasList } from '../data/stores.js'
   const reset = () => {
     $dateIdx = $dateMax
-    $countryStr = ''
+    $filterStr = ''
+    $pinnedAreasList = []
   }
   export let toggleAbout
 </script>
 
-<style type="text/postcss">
+<style type="text/scss">
   nav {
     button {
       @apply flex flex-row text-sm px-4 py-2 text-purple-300 bg-purple-800 cursor-pointer rounded mx-1 transition-all duration-300 ease-out items-center justify-center;

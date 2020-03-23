@@ -6,14 +6,14 @@ export const dates = writable([])
 
 export const areaType = writable('Global')
 
-export const countryStr = writable('')
+export const filterStr = writable('')
 export const allCountries = writable({})
-export const countries = derived([countryStr, data], ([$countryStr, $data]) => {
-  if ($countryStr === '') {
+export const countries = derived([filterStr, data], ([$filterStr, $data]) => {
+  if ($filterStr === '') {
     return Object.keys($data.countries).sort()
   }
 
-  var re = new RegExp($countryStr, 'gi')
+  var re = new RegExp($filterStr, 'gi')
 
   return Object.keys($data.countries)
     .filter(word => word.match(re))
@@ -88,8 +88,8 @@ export const area = derived([data, areaType, dateValue], ([$data, $areaType, $da
 })
 
 export const subAreas = derived(
-  [data, areaType, dateValue, countryStr],
-  ([$data, $areaType, $dateValue, $countryStr]) => {
+  [data, areaType, dateValue, filterStr],
+  ([$data, $areaType, $dateValue, $filterStr]) => {
     let subAreas = []
     if ($areaType === 'Global') {
       for (const country in $data.countries) {
@@ -162,10 +162,25 @@ export const subAreas = derived(
         }
       }
     }
-    if ($countryStr === '') {
-      return subAreas.sort((a, b) => (a.name > b.name ? 1 : -1))
+
+    return subAreas.sort((a, b) => (a.name > b.name ? 1 : -1))
+  }
+)
+
+export const pinnedAreasList = writable([])
+export const pinnedAreas = derived([subAreas, pinnedAreasList], ([$subAreas, $pinnedAreasList]) =>
+  $subAreas.filter(o => $pinnedAreasList.includes(o.name))
+)
+
+export const subAreasFiltered = derived(
+  [subAreas, pinnedAreasList, filterStr],
+  ([$subAreas, $pinnedAreasList, $filterStr]) => {
+    const removePinned = $subAreas.filter(o => !$pinnedAreasList.includes(o.name))
+
+    if ($filterStr === '') {
+      return removePinned
     }
-    var re = new RegExp($countryStr, 'gi')
-    return subAreas.filter(subArea => subArea.name.match(re)).sort((a, b) => (a.name > b.name ? 1 : -1))
+    var re = new RegExp($filterStr, 'gi')
+    return removePinned.filter(subArea => subArea.name.match(re)).sort((a, b) => (a.name > b.name ? 1 : -1))
   }
 )

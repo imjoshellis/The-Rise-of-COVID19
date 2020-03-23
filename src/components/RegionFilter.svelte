@@ -1,5 +1,5 @@
 <script>
-  import { countryStr } from '../data/stores.js'
+  import { filterStr } from '../data/stores.js'
   import { onMount } from 'svelte'
 
   onMount(() => {
@@ -27,5 +27,5 @@
       <i data-feather="search" style="height:1.25rem;width:1.25rem;" />
     </label>
   </div>
-  <input placeholder="Filter Countries by Name" type="text" name="country" id="country" bind:value={$countryStr} />
+  <input placeholder="Filter by Name" type="text" name="country" id="country" bind:value={$filterStr} />
 </div>
