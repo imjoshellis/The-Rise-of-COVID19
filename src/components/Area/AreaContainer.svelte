@@ -29,7 +29,7 @@
 </script>
 
 <div class="px-16">
-  <div class="my-8">
+  <div class="my-8 max-w-3xl mx-auto">
     <Area {p} {back} />
   </div>
   <SquareGrid />
