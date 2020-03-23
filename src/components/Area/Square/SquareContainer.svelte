@@ -5,7 +5,7 @@
   import { beforeUpdate } from 'svelte'
   export let subArea
   let p
-  export let pinColor = ''
+  export let pinColor = 'opacity-0'
   $: p = { ...subArea }
 
   $: p.nowRate = (p.today / p.yesterday).toPrecision(3)
@@ -20,7 +20,7 @@
     if (arr.length > 0) {
       pinColor = 'bg-gray-100 w-full h-full opacity-75'
     } else {
-      pinColor = ''
+      pinColor = 'opacity-0'
     }
   })
 

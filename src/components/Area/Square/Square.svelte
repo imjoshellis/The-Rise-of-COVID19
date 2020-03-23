@@ -18,26 +18,34 @@
   /* Tooltip text */
   .tooltip .tooltiptext {
     visibility: hidden;
-    background-color: black;
-    color: #fff;
     text-align: center;
-    padding: 5px;
+    padding: 8px;
     border-radius: 6px;
 
+    opacity: 0;
+    transition: all 0.15s ease-in;
     /* Position the tooltip text - see examples below! */
     position: absolute;
     top: -5px;
-    right: 130%;
+    right: 150%;
     z-index: 1;
   }
 
   /* Show the tooltip text when you mouse over the tooltip container */
   .tooltip:hover .tooltiptext {
     visibility: visible;
+    opacity: 1;
+    transition: all 0.25s ease-out;
+  }
+  .pin-highlight {
+    @apply bg-gray-100 w-full h-full;
+  }
+  .pin-highlight:hover {
+    @apply opacity-50;
   }
 </style>
 
 <div on:click={pinArea} class="region-square tooltip text-xs cursor-pointer {p.color}">
   <div class="pin-highlight {pinColor}" />
-  <span class="tooltiptext">{p.name}</span>
+  <span class="tooltiptext border-solid border-2 font-bold whitespace-no-wrap {p.color}">{p.name}</span>
 </div>
