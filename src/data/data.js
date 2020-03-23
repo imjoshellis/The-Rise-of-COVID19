@@ -105,6 +105,16 @@ const renameUS = () => {
   delete data.countries.US // Delete old key
 }
 
+const renameCommas = () => {
+  for (const country in data.countries) {
+    if (country.includes(',')) {
+      const newName = country.split(', ')[1] + ' ' + country.split(', ')[0]
+      data.countries[newName] = data.countries[country]
+      delete data.countries[country]
+    }
+  }
+}
+
 const getApi = async () => {
   const response = await fetch(apiURL, {
     headers: {}
@@ -114,6 +124,7 @@ const getApi = async () => {
 
   await parseApi(apiData)
   await renameUS()
+  await renameCommas()
   return data
 }
 
