@@ -38,48 +38,52 @@
   }
 
   button {
-    @apply px-2 w-8 h-8 rounded mr-2;
+    @apply px-1 w-6 h-6 rounded mr-2 transition-all duration-300 ease-in-out;
+    .feather-lock,
+    .feather-unlock {
+      @apply transition-all duration-200;
+    }
   }
 
-  .unlock {
+  .pinned {
     @apply bg-purple-900 text-purple-300;
 
     .feather-lock {
-      display: block;
+      opacity: 1;
     }
     .feather-unlock {
-      display: none;
+      opacity: 0;
     }
     &:hover {
-      @apply text-purple-100 bg-purple-500;
+      @apply bg-gray-800 text-gray-500;
 
       .feather-lock {
-        display: none;
+        opacity: 0;
       }
       .feather-unlock {
-        display: block;
+        opacity: 1;
       }
     }
   }
 
-  .lock {
-    @apply bg-purple-400 text-purple-900;
+  .unpinned {
+    @apply bg-gray-800 text-gray-500;
 
     .feather-lock {
-      display: none;
+      opacity: 0;
     }
     .feather-unlock {
-      display: block;
+      opacity: 1;
     }
 
     &:hover {
-      @apply bg-purple-700 text-purple-400;
+      @apply bg-purple-900 text-purple-300;
 
       .feather-lock {
-        display: block;
+        opacity: 1;
       }
       .feather-unlock {
-        display: none;
+        opacity: 0;
       }
     }
   }
@@ -88,7 +92,7 @@
 <div class="flex flex-col">
   <div class="flex flex-row justify-start items-center">
     {#if pinned}
-      <button on:click={togglePin} class="unlock">
+      <button on:click={togglePin} class="pinned">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -96,26 +100,14 @@
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-lock">
+          stroke-linejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-unlock">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0 1 9.9-1" />
+          <path class="feather-lock" d="M7 11V7a5 5 0 0 1 10 0v4" />
+          <path class="feather-unlock" d="M7 11V7a5 5 0 0 1 9.9-1" />
         </svg>
       </button>
     {:else}
-      <button on:click={togglePin} class="lock">
+      <button on:click={togglePin} class="unpinned">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -123,22 +115,10 @@
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-lock">
+          stroke-linejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-unlock">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0 1 9.9-1" />
+          <path class="feather-lock" d="M7 11V7a5 5 0 0 1 10 0v4" />
+          <path class="feather-unlock" d="M7 11V7a5 5 0 0 1 9.9-1" />
         </svg>
       </button>
     {/if}
