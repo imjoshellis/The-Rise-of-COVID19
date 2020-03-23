@@ -87,6 +87,8 @@ export const area = derived([data, areaType, dateValue], ([$data, $areaType, $da
   return area
 })
 
+export const pinnedAreas = writable([])
+
 export const subAreas = derived(
   [data, areaType, dateValue, countryStr],
   ([$data, $areaType, $dateValue, $countryStr]) => {
@@ -162,6 +164,7 @@ export const subAreas = derived(
         }
       }
     }
+
     if ($countryStr === '') {
       return subAreas.sort((a, b) => (a.name > b.name ? 1 : -1))
     }
