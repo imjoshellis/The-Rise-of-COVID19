@@ -21,7 +21,7 @@
 
 ## Version
 
-The `master` branch is automatically deployed live when updated (via Netlify): [Live Site](https://determined-raman-df6277.netlify.com)
+The `master` branch is automatically deployed live when updated (via Netlify): [Live Site](https://riseofcovid19.netlify.com)
 
 The Rise of Covid-19 is currently extremly early alpha: v0.1.0-alpha
 
