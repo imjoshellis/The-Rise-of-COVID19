@@ -1,5 +1,5 @@
 const purgecss = require('@fullhuman/postcss-purgecss')({
-  content: ['./src/**/*.html', './src/**/*.svelte'],
+  content: ['./src/**/*.html', './src/**/*.svelte', './src/data/data.js'],
 
   whitelistPatterns: [/svelte-/],
 
