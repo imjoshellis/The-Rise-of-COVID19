@@ -10,7 +10,7 @@
   }
 
   .chart-wrap {
-    flex-basis: 30%;
+    flex-basis: 30;
   }
   .chart-div {
     overflow: hidden;
@@ -20,11 +20,11 @@
 
   .data-div {
     flex-basis: 70%;
-    @apply flex flex-row justify-around font-mono;
+    @apply flex justify-around font-mono;
   }
 
   .col {
-    @apply flex flex-col;
+    @apply flex flex-col mr-2;
   }
 
   .data-text {
@@ -38,13 +38,13 @@
 
 <div class="flex flex-col">
   <h3 on:click={back} class={p.style}>{p.back}{p.name}</h3>
-  <div class="flex flex-row">
-    <div class="chart-wrap">
+  <div class="flex sm:flex-row flex-col">
+    <div class="chart-wrap w-48">
       <div class="chart-div">
         <Slope {p} />
       </div>
     </div>
-    <div class="data-div">
+    <div class="data-div md:flex-row flex-col">
       <div class="col">
         <h4>Active Cases</h4>
         <div class="data-text ">Today: {p.today}</div>
