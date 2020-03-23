@@ -7,7 +7,7 @@
   export let toggleAbout
 </script>
 
-<style type="text/scss">
+<style type="text/postcss">
   nav {
     button {
       @apply flex flex-row text-sm px-4 py-2 text-purple-300 bg-purple-800 cursor-pointer rounded mx-1 transition-all duration-300 ease-out items-center justify-center;
