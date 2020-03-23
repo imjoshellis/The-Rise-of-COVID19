@@ -158,6 +158,7 @@ export const subAreas = derived(
             twoAgo: twoActive,
             threeAgo: threeActive
           }
+          subAreas = subAreas.filter(o => !o.name.includes(','))
           subAreas = [...subAreas, subArea]
         }
       }
