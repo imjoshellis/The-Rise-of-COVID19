@@ -38,97 +38,27 @@ export const colorizeBg = (x, y, today) => {
   }
 }
 
-const apiURL = 'https://coronavirus-tracker-api.herokuapp.com/v2/locations?timelines=1'
-
-const data = {}
-
-const parseApi = apiData => {
-  data.api = apiData
-
-  // populate global confirmed data
-  data.active = {}
-  for (const e in apiData.locations[0].timelines.confirmed.timeline) {
-    data.active[e] = 0
-  }
-
-  // populate countries & subareas
-  data.countries = {}
-  for (const e in apiData.locations) {
-    const country = apiData.locations[e].country
-    const province = apiData.locations[e].province
-    const confirmedDates = apiData.locations[e].timelines.confirmed.timeline
-    const deathDates = apiData.locations[e].timelines.deaths.timeline
-    const recoveredDates = apiData.locations[e].timelines.recovered.timeline
-
-    // new country if it doesn't exist yet
-    if (data.countries[country] === undefined) {
-      data.countries[country] = {
-        total: {
-          active: {}
-        }
-      }
+export const parseData = dateFile => {
+  const data = {}
+  dateFile.data.forEach(o => {
+    data[o.countryName] = {
+      active: o.confirmed - o.cured - o.death,
+      confirmed: o.confirmed,
+      cured: o.cured,
+      death: o.death,
+      code: o.countryCode
     }
-
-    // new subarea if it exists in the data
-    if (province.length > 0) {
-      data.countries[country][province] = {
-        active: {}
-      }
-    }
-
-    // iterate over timeline
-    for (const date in confirmedDates) {
-      if (data.countries[country].total.active[date] === undefined) {
-        // if no data exists yet, create it
-        data.countries[country].total.active[date] =
-          parseInt(confirmedDates[date]) - parseInt(deathDates[date]) - parseInt(recoveredDates[date])
-      } else {
-        // otherwise, add to existing data
-        data.countries[country].total.active[date] +=
-          parseInt(confirmedDates[date]) - parseInt(deathDates[date]) - parseInt(recoveredDates[date])
-      }
-
-      // add to global total
-      data.active[date] += parseInt(confirmedDates[date]) - parseInt(deathDates[date]) - parseInt(recoveredDates[date])
-
-      // if subarea is valid
-      if (province.length > 0) {
-        data.countries[country][province].active[date] =
-          parseInt(confirmedDates[date]) - parseInt(deathDates[date]) - parseInt(recoveredDates[date])
-      }
-    }
-  }
-}
-
-const renameUS = () => {
-  data.countries['United States (USA)'] = data.countries.US // Assign new key
-  delete data.countries.US // Delete old key
-}
-
-const renameCommas = () => {
-  for (const country in data.countries) {
-    if (country.includes(',')) {
-      const newName = country.split(', ')[1] + ' ' + country.split(', ')[0]
-      data.countries[newName] = data.countries[country]
-      delete data.countries[country]
-    }
-  }
-}
-
-const getApi = async () => {
-  const response = await fetch(apiURL, {
-    headers: {}
   })
-
-  const apiData = await response.json()
-
-  await parseApi(apiData)
-  await renameUS()
-  await renameCommas()
   return data
 }
 
-export default getApi
+export const getDates = o => {
+  const dates = []
+  for (const date in o.data) {
+    dates.push(o.data[date].day)
+  }
+  return dates
+}
 
 export const last = function (array, n) {
   if (array == null) return void 0
