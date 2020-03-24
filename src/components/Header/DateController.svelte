@@ -1,8 +1,8 @@
 <script>
-  import { data, dates, dateValue, dateIdx, dateMax } from '../../data/stores.js'
+  import { dates, dateValue, dateIdx, dateMax } from '../../data/stores.js'
+  import { parseData } from '../../data/data.js'
   import noUiSlider from 'nouislider'
-  import { onMount, beforeUpdate } from 'svelte'
-  import Papa from 'papaparse'
+  import { onMount } from 'svelte'
 
   let slider
 
@@ -41,7 +41,6 @@
   $: currentDate = months[$dateValue.getMonth()] + ' ' + $dateValue.getDate() + ', ' + $dateValue.getFullYear()
 
   onMount(() => {
-    console.log($dates)
     noUiSlider.create(slider, {
       padding: [4, 0],
       range: {
@@ -61,22 +60,6 @@
     })
 
     feather.replace()
-  })
-
-  beforeUpdate(() => {
-    for (let i; i < 4; i++) {
-      let currentDate = $dates[$dateIdx - i].split('/').join('-')
-      Papa.parse(`https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/report/daily/${currentDate}.csv`, {
-        download: true,
-        delimiter: ',',
-        header: true,
-        skipEmptyLines: true,
-        complete: o => {
-          $data[currentDate] = parseData(o)
-          console.log("it's working?")
-        }
-      })
-    }
   })
 </script>
 
