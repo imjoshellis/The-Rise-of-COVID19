@@ -68,7 +68,6 @@ export const subAreas = derived([data, dates, dateIdx], ([$data, $dates, $dateId
   }
   const style = 'cursor-pointer hover:text-gray-100 transition-all duration-300 ease-out'
 
-  console.log(subAreas)
   return Object.values(subAreas)
 })
 
