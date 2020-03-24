@@ -1,28 +1,35 @@
 import moment from 'moment'
+import Papa from 'papaparse'
 import { derived, writable } from 'svelte/store'
+import { parseData } from './data.js'
 
-export const data = writable({})
 export const dates = writable([])
 
 export const areaType = writable('Global')
 
 export const filterStr = writable('')
-export const allCountries = writable({})
-export const countries = derived([filterStr, data], ([$filterStr, $data]) => {
-  if ($filterStr === '') {
-    return Object.keys($data.countries).sort()
-  }
 
-  var re = new RegExp($filterStr, 'gi')
-
-  return Object.keys($data.countries)
-    .filter(word => word.match(re))
-    .sort()
-})
-
-export const dateMax = writable(0)
-export const dateIdx = writable(0)
+export const dateMax = writable()
+export const dateIdx = writable()
 export const dateValue = derived([dates, dateIdx], ([$dates, $dateIdx]) => new Date($dates[$dateIdx]))
+export const data = derived([dates, dateIdx], ([$dates, $dateIdx]) => {
+  const data = {}
+  if ($dates.length > 0 && $dateIdx) {
+    for (let i = 0; i < 4; i++) {
+      const currentDate = $dates[$dateIdx - i].split('/').join('-')
+      Papa.parse(`https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/report/daily/${currentDate}.csv`, {
+        download: true,
+        delimiter: ',',
+        header: true,
+        skipEmptyLines: true,
+        complete: o => {
+          data[currentDate] = parseData(o)
+        }
+      })
+    }
+  }
+  return data
+})
 
 export const area = derived([data, areaType, dateValue], ([$data, $areaType, $dateValue]) => {
   let area

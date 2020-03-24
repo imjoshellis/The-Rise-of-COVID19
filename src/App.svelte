@@ -1,5 +1,5 @@
 <script>
-  import { data, dates, dateMax, dateValue, dateIdx, allCountries } from './data/stores.js'
+  import { data, dates, dateMax, dateValue, dateIdx } from './data/stores.js'
   import { getDates, parseData } from './data/data.js'
   import { onMount } from 'svelte'
   import Tailwindcss from './Tailwindcss.svelte'
@@ -18,25 +18,7 @@
         $dates = getDates(o)
         $dateMax = (await $dates.length) - 1
         $dateIdx = await $dateMax
-        for (let i = 0; i < 4; i++) {
-          let currentDate = await $dates[$dateIdx - i].split('/').join('-')
-          await Papa.parse(
-            `https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/report/daily/${currentDate}.csv`,
-            {
-              download: true,
-              delimiter: ',',
-              header: true,
-              skipEmptyLines: true,
-              complete: o => {
-                $data[currentDate] = parseData(o)
-              }
-            }
-          )
-        }
-        console.log($dates)
-        console.log($data)
-        console.log($dateValue)
-        return $data
+        await console.log($data)
       }
     })
   })
