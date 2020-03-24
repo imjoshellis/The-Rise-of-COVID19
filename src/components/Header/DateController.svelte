@@ -1,5 +1,7 @@
 <script>
-  import { dates, dateValue, dateIdx, dateMax } from '../../data/stores.js'
+  import { data, dates, dateValue, dateIdx, dateMax } from '../../data/stores.js'
+  import Papa from 'papaparse'
+  import { parseData } from '../../data/data.js'
   import noUiSlider from 'nouislider'
   import { onMount } from 'svelte'
 

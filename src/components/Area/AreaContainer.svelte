@@ -2,8 +2,10 @@
   import Area from './Area.svelte'
   import SubAreaGrid from '../SubArea/SubAreaGrid.svelte'
   import SquareGrid from './Square/SquareGrid.svelte'
-  import { area, areaType, pinnedAreasList } from '../../data/stores.js'
+  import { data, dates, dateIdx, area, pinnedAreasList } from '../../data/stores.js'
+  import { parseData } from '../../data/data.js'
   import { colorizeText } from '../../data/data.js'
+
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   let p
   $: p = $area
@@ -21,17 +23,12 @@
   $: p.color = colorizeText(p.nowRate, p.prevRate, p.today)
   $: p.back = p.name === 'Global' ? '' : '‹ '
 
-  const back = () => {
-    $areaType = 'Global'
-    $pinnedAreasList = []
-  }
-
   $: valid = p.nowRate > 0 && p.nowRate !== Infinity && p.prevRate !== Infinity && p.yesterday > 0 && p.twoAgo > 0
 </script>
 
 <div class="px-16">
   <div class="my-8 max-w-3xl mx-auto">
-    <Area {p} {back} />
+    <Area {p} />
   </div>
   <SquareGrid />
   <SubAreaGrid />
