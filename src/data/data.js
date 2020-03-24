@@ -38,8 +38,6 @@ export const colorizeBg = (x, y, today) => {
   }
 }
 
-const apiURL = 'https://coronavirus-tracker-api.herokuapp.com/v2/locations?timelines=1'
-
 const data = {}
 
 const parseApi = apiData => {
@@ -100,35 +98,17 @@ const parseApi = apiData => {
   }
 }
 
-const renameUS = () => {
-  data.countries['United States (USA)'] = data.countries.US // Assign new key
-  delete data.countries.US // Delete old key
+const parseData = raw => {
+  return raw
 }
 
-const renameCommas = () => {
-  for (const country in data.countries) {
-    if (country.includes(',')) {
-      const newName = country.split(', ')[1] + ' ' + country.split(', ')[0]
-      data.countries[newName] = data.countries[country]
-      delete data.countries[country]
-    }
+export const getDates = o => {
+  const dates = []
+  for (const date in o.data) {
+    dates.push(o.data[date].day)
   }
+  return dates
 }
-
-const getApi = async () => {
-  const response = await fetch(apiURL, {
-    headers: {}
-  })
-
-  const apiData = await response.json()
-
-  await parseApi(apiData)
-  await renameUS()
-  await renameCommas()
-  return data
-}
-
-export default getApi
 
 export const last = function (array, n) {
   if (array == null) return void 0

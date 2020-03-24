@@ -1,18 +1,33 @@
 <script>
-  import { data, dates, dateMax, dateIdx, allCountries } from './data/stores.js'
-  import getApi from './data/data.js'
+  import { data, dates, dateMax, dateValue, dateIdx, allCountries } from './data/stores.js'
+  import { getDates } from './data/data.js'
+  import { onMount } from 'svelte'
   import Tailwindcss from './Tailwindcss.svelte'
   import Spinner from 'svelte-spinner'
   import Header from './components/Header/Header.svelte'
   import AreaContainer from './components/Area/AreaContainer.svelte'
+  import Papa from 'papaparse'
 
+  onMount(() => {
+    Papa.parse('https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/report/country/US.csv', {
+      download: true,
+      delimiter: ',',
+      header: true,
+      skipEmptyLines: true,
+      complete: async o => {
+        $dates = getDates(o)
+        // $dates = await Object.keys($data.active)
+        $dateMax = (await $dates.length) - 1
+        $dateIdx = await $dateMax
+        // $allCountries = await Object.keys($data.countries).sort()
+        console.log($dates)
+        console.log($dateValue)
+        return $data
+      }
+    })
+  })
   const waitForApi = async () => {
     $data = await getApi()
-    $dates = await Object.keys($data.active)
-    $dateMax = (await $dates.length) - 1
-    $dateIdx = await $dateMax
-    $allCountries = await Object.keys($data.countries).sort()
-    return $data
   }
 
   let promise = waitForApi()
