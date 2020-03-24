@@ -4,26 +4,10 @@
   import SquareGrid from './Square/SquareGrid.svelte'
   import { data, dates, dateIdx, area, pinnedAreasList } from '../../data/stores.js'
   import { parseData } from '../../data/data.js'
-  import { onMount } from 'svelte'
   import { colorizeText } from '../../data/data.js'
-  import Papa from 'papaparse'
 
   const arrow = (x, y) => (x > y ? '▴' : x === y ? '·' : '▾')
   let p
-  onMount(() => {
-    for (let i = 0; i < 4; i++) {
-      const currentDate = $dates[$dateIdx - i].split('/').join('-')
-      Papa.parse(`https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/report/daily/${currentDate}.csv`, {
-        download: true,
-        delimiter: ',',
-        header: true,
-        skipEmptyLines: true,
-        complete: o => {
-          $data[currentDate] = parseData(o)
-        }
-      })
-    }
-  })
   $: p = $area
 
   $: p.nowRate = (p.today / p.yesterday).toPrecision(3)

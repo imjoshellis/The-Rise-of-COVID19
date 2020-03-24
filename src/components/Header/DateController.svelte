@@ -1,5 +1,6 @@
 <script>
-  import { dates, dateValue, dateIdx, dateMax } from '../../data/stores.js'
+  import { data, dates, dateValue, dateIdx, dateMax } from '../../data/stores.js'
+  import Papa from 'papaparse'
   import { parseData } from '../../data/data.js'
   import noUiSlider from 'nouislider'
   import { onMount } from 'svelte'
@@ -53,6 +54,21 @@
 
     slider.noUiSlider.on('update', value => {
       $dateIdx = Math.round(value)
+      for (let i = 0; i < 4; i++) {
+        const currentDate = $dates[$dateIdx - i].split('/').join('-')
+        Papa.parse(
+          `https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/report/daily/${currentDate}.csv`,
+          {
+            download: true,
+            delimiter: ',',
+            header: true,
+            skipEmptyLines: true,
+            complete: o => {
+              $data[currentDate] = parseData(o)
+            }
+          }
+        )
+      }
     })
 
     dateIdx.subscribe(v => {
