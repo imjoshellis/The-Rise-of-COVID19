@@ -1,7 +1,6 @@
 <script>
   import Slope from '../Slope.svelte'
   export let p
-  export let setArea
   export let pinned
   export let togglePin
 </script>
@@ -123,7 +122,7 @@
         </svg>
       </button>
     {/if}
-    <h3 on:click={setArea} class="{p.style} text-gray-500">{p.name}</h3>
+    <h3 class="{p.style} text-gray-500">{p.name}</h3>
   </div>
   <div class="flex flex-row">
     <div class="chart-wrap">
