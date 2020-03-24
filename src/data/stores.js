@@ -31,36 +31,39 @@ export const data = derived([dates, dateIdx], ([$dates, $dateIdx]) => {
 
 export const area = derived([data], ([$data]) => {
   let area
-  const currentDates = Object.keys($data).sort()
-  console.log(currentDates)
-  const today = moment($dateValue)
-    .utc()
-    .format()
-  const todayActive = $data.active[today]
-  const yesterday = moment($dateValue)
-    .utc()
-    .subtract(1, 'days')
-    .format()
-  const yesterdayActive = $data.active[yesterday]
-  const twoAgo = moment($dateValue)
-    .utc()
-    .subtract(2, 'days')
-    .format()
-  const twoActive = $data.active[twoAgo]
-  const threeAgo = moment($dateValue)
-    .utc()
-    .subtract(3, 'days')
-    .format()
-  const threeActive = $data.active[threeAgo]
-  area = {
-    name: 'Global',
-    today: todayActive,
-    yesterday: yesterdayActive,
-    twoAgo: twoActive,
-    threeAgo: threeActive,
-    style: ''
+  const currentDates = Object.keys($data)
+  if (false) {
+    const today = moment($dateValue)
+      .utc()
+      .format()
+    const todayActive = $data.active[today]
+    const yesterday = moment($dateValue)
+      .utc()
+      .subtract(1, 'days')
+      .format()
+    const yesterdayActive = $data.active[yesterday]
+    const twoAgo = moment($dateValue)
+      .utc()
+      .subtract(2, 'days')
+      .format()
+    const twoActive = $data.active[twoAgo]
+    const threeAgo = moment($dateValue)
+      .utc()
+      .subtract(3, 'days')
+      .format()
+    const threeActive = $data.active[threeAgo]
+
+    area = {
+      name: 'Global',
+      today: todayActive,
+      yesterday: yesterdayActive,
+      twoAgo: twoActive,
+      threeAgo: threeActive,
+      style: ''
+    }
+    return area
   }
-  return area
+  return currentDates
 })
 
 export const subAreas = derived([data, dateValue, filterStr], ([$data, $dateValue, $filterStr]) => {

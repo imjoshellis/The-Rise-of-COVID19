@@ -1,5 +1,5 @@
 <script>
-  import { data, dates, dateMax, dateValue, dateIdx } from './data/stores.js'
+  import { data, dates, dateMax, dateValue, area, dateIdx } from './data/stores.js'
   import { getDates, parseData } from './data/data.js'
   import { onMount } from 'svelte'
   import Tailwindcss from './Tailwindcss.svelte'
@@ -15,17 +15,21 @@
       header: true,
       skipEmptyLines: true,
       complete: async o => {
-        $dates = getDates(o)
+        $dates = await getDates(o)
         $dateMax = (await $dates.length) - 1
         $dateIdx = await $dateMax
-        await console.log($data)
       }
     })
   })
 </script>
 
 <Tailwindcss />
-{#if false}
+{#if $dates.length < 1 || $dateIdx === undefined}
+  <div class="w-screen h-screen flex flex row items-center justify-center">
+    <Spinner size="48" speed="500" color="#404244" thickness="2" gap="40" />
+    <div class="mr-16 text-2xl">Loading data...</div>
+  </div>
+{:else}
   <Header />
   <AreaContainer />
 {/if}

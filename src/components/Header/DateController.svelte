@@ -41,6 +41,7 @@
   $: currentDate = months[$dateValue.getMonth()] + ' ' + $dateValue.getDate() + ', ' + $dateValue.getFullYear()
 
   onMount(() => {
+    console.log($dates)
     noUiSlider.create(slider, {
       padding: [4, 0],
       range: {
