@@ -42,9 +42,9 @@ export const parseData = dateFile => {
   const data = {}
   dateFile.data.forEach(o => {
     data[o.countryName] = {
-      active: o.confirmed - o.cured - o.death,
+      active: o.confirmed - o.recovered - o.death,
       confirmed: o.confirmed,
-      cured: o.cured,
+      recovered: o.recovered,
       death: o.death,
       code: o.countryCode
     }

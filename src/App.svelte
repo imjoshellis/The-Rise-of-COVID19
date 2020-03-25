@@ -9,7 +9,7 @@
   import Papa from 'papaparse'
 
   onMount(() => {
-    Papa.parse('https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/report/country/US.csv', {
+    Papa.parse('https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/countryReport/country/US.csv', {
       download: true,
       delimiter: ',',
       header: true,
@@ -26,15 +26,18 @@
     const datesLength = $dates.length
     for (let i = 0; i < datesLength; i++) {
       const currentDate = $dates[$dateIdx - i].split('/').join('-')
-      Papa.parse(`https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/report/daily/${currentDate}.csv`, {
-        download: true,
-        delimiter: ',',
-        header: true,
-        skipEmptyLines: true,
-        complete: o => {
-          $data[currentDate] = parseData(o)
+      Papa.parse(
+        `https://raw.githubusercontent.com/ulklc/covid19-timeseries/master/countryReport/daily/${currentDate}.csv`,
+        {
+          download: true,
+          delimiter: ',',
+          header: true,
+          skipEmptyLines: true,
+          complete: o => {
+            $data[currentDate] = parseData(o)
+          }
         }
-      })
+      )
     }
   }
 </script>
